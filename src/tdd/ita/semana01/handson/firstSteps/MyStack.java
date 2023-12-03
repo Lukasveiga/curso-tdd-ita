@@ -1,6 +1,9 @@
 package tdd.ita.semana01.handson.firstSteps;
 
-public class MyStack {
+public class MyStack <T> {
+
+    private T element;
+
     public boolean isEmpty() {
         return true;
     }
@@ -9,10 +12,11 @@ public class MyStack {
         return 0;
     }
 
-    public void add(String first) {
+    public void add(T element) {
+        this.element = element;
     }
 
-    public String peek() {
-        return "";
+    public T peek() {
+        return element;
     }
 }
