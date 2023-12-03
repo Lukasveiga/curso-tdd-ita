@@ -25,3 +25,5 @@ O segundo passo é começar a escrever o corpo do código para que os testes pas
 O terceiro passo é refatorar buscando a melhoria do código e verificando o comportamento dos testes a cada alteração. 
 
 Esse ciclo irá se repetir até que o código alcance o nível de satisfação, apresentando uma boa estrutura e preferencialmente seguindo as boas práticas de um código/arquitetura limpa. 
+
+[Hands on!](https://github.com/Lukasveiga/curso-tdd-ita/tree/main/src/tdd/ita/semana01/handson)
