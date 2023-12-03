@@ -3,17 +3,19 @@ package tdd.ita.semana01.handson.firstSteps;
 public class MyStack <T> {
 
     private T element;
+    private static int nElements;
 
     public boolean isEmpty() {
-        return true;
+        return element == null;
     }
 
     public int size() {
-        return 0;
+        return nElements;
     }
 
     public void add(T element) {
         this.element = element;
+        nElements ++;
     }
 
     public T peek() {
