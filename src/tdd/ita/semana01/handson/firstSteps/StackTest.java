@@ -39,7 +39,12 @@ public class StackTest {
     }
 
     @Test
-    public void removeElementFromEmptyStack() {
+    public void popElementFromEmptyStack() {
         assertThrows(EmptyMyStackException.class, () -> stack.pop());
+    }
+
+    @Test
+    public void peekElementFromEmptyStack() {
+        assertThrows(EmptyMyStackException.class, () -> stack.peek());
     }
 }
