@@ -8,4 +8,11 @@ public class MyStack {
     public int size() {
         return 0;
     }
+
+    public void add(String first) {
+    }
+
+    public String peek() {
+        return "";
+    }
 }
