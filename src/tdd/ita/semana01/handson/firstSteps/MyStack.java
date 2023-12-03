@@ -28,6 +28,10 @@ public class MyStack <T> {
     }
 
     public T pop() {
+        if(this.elements.isEmpty()) {
+            throw new EmptyMyStackException("Isn't possible pop element from a empty stack");
+        }
+
         int index = this.elements.size() - 1;
         return this.elements.remove(index);
     }
