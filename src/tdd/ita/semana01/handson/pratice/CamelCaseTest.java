@@ -10,10 +10,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CamelCaseTest {
 
     @Test
-    public void convertCamelCaseToStringList() {
-        String input = "nome";
-        String expectedOutput = "Nome";
+    public void convertCamelCaseSimpleString() {
+        var input = "nome";
+        var expectedOutput = List.of("nome");
         var output = CamelCase.convertCamelCase(input);
-        assertEquals(List.of(expectedOutput), output);
+        assertEquals(expectedOutput, output);
+    }
+
+    @Test
+    public void convertCamelCaseDoubleString() {
+        String input = "nomeComposto";
+        var expectedOutput = List.of("nome", "composto");
+        var output = CamelCase.convertCamelCase(input);
+        assertEquals(expectedOutput, output);
+        assertEquals(2, output.size());
     }
 }

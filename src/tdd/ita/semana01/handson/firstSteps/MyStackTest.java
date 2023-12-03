@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class StackTest {
+public class MyStackTest {
 
     private MyStack<String> stack;
     @BeforeEach
