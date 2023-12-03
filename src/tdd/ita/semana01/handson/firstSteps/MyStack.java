@@ -1,24 +1,35 @@
 package tdd.ita.semana01.handson.firstSteps;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MyStack <T> {
 
-    private T element;
-    private int nElements = 0;
+    private final ArrayList<T> elements;
+
+    public MyStack() {
+        this.elements = new ArrayList<T>();
+    }
 
     public boolean isEmpty() {
-        return element == null;
+        return elements.isEmpty();
     }
 
     public int size() {
-        return nElements;
+        return this.elements.size();
     }
 
     public void add(T element) {
-        this.element = element;
-        nElements ++;
+        this.elements.add(element);
     }
 
     public T peek() {
-        return element;
+        int index = this.elements.size() - 1;
+        return this.elements.get(index);
+    }
+
+    public T pop() {
+        int index = this.elements.size() - 1;
+        return this.elements.remove(index);
     }
 }
