@@ -4,6 +4,7 @@ import java.util.List;
 
 public class CamelCase {
     public static List<String> convertCamelCase(String input) {
-        return List.of(input);
+        String result = input.substring(0,1).toUpperCase() + input.substring(1);
+        return List.of(result);
     }
 }

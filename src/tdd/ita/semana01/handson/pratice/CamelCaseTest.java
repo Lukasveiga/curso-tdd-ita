@@ -12,7 +12,8 @@ public class CamelCaseTest {
     @Test
     public void convertCamelCaseToStringList() {
         String input = "nome";
+        String expectedOutput = "Nome";
         var output = CamelCase.convertCamelCase(input);
-        assertEquals(List.of(input), output);
+        assertEquals(List.of(expectedOutput), output);
     }
 }
