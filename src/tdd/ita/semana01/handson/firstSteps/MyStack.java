@@ -1,7 +1,6 @@
 package tdd.ita.semana01.handson.firstSteps;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MyStack <T> {
 
