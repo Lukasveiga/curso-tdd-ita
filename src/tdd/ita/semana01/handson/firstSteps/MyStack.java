@@ -3,7 +3,7 @@ package tdd.ita.semana01.handson.firstSteps;
 public class MyStack <T> {
 
     private T element;
-    private static int nElements;
+    private int nElements = 0;
 
     public boolean isEmpty() {
         return element == null;

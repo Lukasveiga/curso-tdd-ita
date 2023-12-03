@@ -20,4 +20,13 @@ public class StackTest {
         assertEquals(1, stack.size());
         assertEquals("first", stack.peek());
     }
+
+    @Test
+    public void stackTwoElement() {
+        var stack = new MyStack<String>();
+        stack.add("first");
+        stack.add("second");
+        assertEquals(2, stack.size());
+        assertEquals("second", stack.peek());
+    }
 }
