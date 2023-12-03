@@ -22,11 +22,15 @@ public class StackTest {
     }
 
     @Test
-    public void stackTwoElement() {
+    public void stackAndUnstackTwoElement() {
         var stack = new MyStack<String>();
         stack.add("first");
         stack.add("second");
         assertEquals(2, stack.size());
         assertEquals("second", stack.peek());
+        String unstack = stack.pop();
+        assertEquals(1, stack.size());
+        assertEquals("first", stack.peek());
+        assertEquals("second", unstack);
     }
 }
