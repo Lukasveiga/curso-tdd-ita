@@ -7,7 +7,7 @@ public class MyStack <T> {
     private final ArrayList<T> elements;
 
     public MyStack() {
-        this.elements = new ArrayList<T>();
+        this.elements = new ArrayList<>();
     }
 
     public boolean isEmpty() {

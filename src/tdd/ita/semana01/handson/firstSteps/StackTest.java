@@ -1,6 +1,7 @@
 package tdd.ita.semana01.handson.firstSteps;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StackTest {
@@ -35,5 +36,10 @@ public class StackTest {
         assertEquals(1, stack.size());
         assertEquals("first", stack.peek());
         assertEquals("second", unstack);
+    }
+
+    @Test
+    public void removeElementFromEmptyStack() {
+        assertThrows(EmptyMyStackException.class, () -> stack.pop());
     }
 }
