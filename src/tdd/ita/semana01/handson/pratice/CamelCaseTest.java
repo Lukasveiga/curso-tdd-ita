@@ -25,4 +25,12 @@ public class CamelCaseTest {
         assertEquals(expectedOutput, output);
         assertEquals(2, output.size());
     }
+
+    @Test
+    public void convertCamelCaseUpperCaseString() {
+        String input = "CPF";
+        var expectedOutput = List.of("CPF");
+        var output = CamelCase.convertCamelCase(input);
+        assertEquals(expectedOutput, output);
+    }
 }

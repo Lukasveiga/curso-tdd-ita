@@ -7,14 +7,25 @@ public class CamelCase {
     public static List<String> convertCamelCase(String input) {
         var resultList = new ArrayList<String>();
 
-        var splitedInput = input.trim().split("(?=[A-Z])|(?<=[a-z])(?=[A-Z])");
+        var splitedInput = input.trim().split("(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])");
 
         for(String word : splitedInput) {
-            word = word.trim();
-            var result = word.substring(0,1).toLowerCase() + word.substring(1);
+            var result = word.trim();
+
+            if(!isAllLettersUpperCase(word)) {
+                result = word.substring(0,1).toLowerCase() + word.substring(1);
+            }
+
             resultList.add(result);
         }
 
         return resultList;
+    }
+
+    private static boolean isAllLettersUpperCase(String word) {
+        for(String l : word.split("")) {
+            if(!l.equals(l.toUpperCase())) return false;
+        }
+        return true;
     }
 }
