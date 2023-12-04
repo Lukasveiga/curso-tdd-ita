@@ -10,6 +10,10 @@ public class CamelCase {
             throw new IllegalArgumentException("Input cannot start with numbers");
         }
 
+        if(hasSpecialCharacters(input)) {
+            throw new IllegalArgumentException("Input cannot have special characters");
+        }
+
         var resultList = new ArrayList<String>();
 
         String[] splitedInput;
@@ -47,5 +51,10 @@ public class CamelCase {
     private static boolean startWithNumbers(String word) {
         var regex = "[0-9]";
         return word.substring(0,1).matches(regex);
+    }
+
+    private static boolean hasSpecialCharacters(String word) {
+        var regex = ".*[\\W_]+.*";
+        return word.matches(regex);
     }
 }

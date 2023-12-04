@@ -62,6 +62,6 @@ public class CamelCaseTest {
     public void convertCamelCaseThrowsIfHaveSpecialCharacters() {
         String input = "nome#Composto";
         IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> CamelCase.convertCamelCase(input));
-        assertEquals( "Cannot have special characters",illegalArgumentException.getMessage());
+        assertEquals( "Input cannot have special characters",illegalArgumentException.getMessage());
     }
 }
