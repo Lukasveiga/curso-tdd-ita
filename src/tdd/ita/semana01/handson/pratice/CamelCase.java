@@ -7,7 +7,12 @@ public class CamelCase {
     public static List<String> convertCamelCase(String input) {
         var resultList = new ArrayList<String>();
 
-        var splitedInput = input.trim().split("(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])");
+        String[] splitedInput;
+
+        if(hasNumbers(input))
+            splitedInput = input.trim().split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
+        else
+            splitedInput = input.trim().split("(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])");
 
         for(String word : splitedInput) {
             var result = word.trim();
@@ -27,5 +32,10 @@ public class CamelCase {
             if(!l.equals(l.toUpperCase())) return false;
         }
         return true;
+    }
+
+    private static boolean hasNumbers(String word) {
+        var regex = ".*[0-9].*";
+        return word.matches(regex);
     }
 }
