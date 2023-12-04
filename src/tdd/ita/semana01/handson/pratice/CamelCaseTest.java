@@ -39,7 +39,6 @@ public class CamelCaseTest {
         String input = "numeroCPFContribuinte";
         var expectedOutput = List.of("numero","CPF", "contribuinte");
         var output = CamelCase.convertCamelCase(input);
-        System.out.println(output);
         assertEquals(expectedOutput, output);
     }
 
