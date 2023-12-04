@@ -18,10 +18,13 @@ public class CamelCase {
 
         String[] splitedInput;
 
+        var splitWithNumbersRegex = "(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)";
+        var splitCamelCaseRegex = "(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])";
+
         if(hasNumbers(input))
-            splitedInput = input.trim().split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");
+            splitedInput = input.trim().split(splitWithNumbersRegex);
         else
-            splitedInput = input.trim().split("(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])");
+            splitedInput = input.trim().split(splitCamelCaseRegex);
 
         for(String word : splitedInput) {
             var result = word.trim();
