@@ -57,4 +57,11 @@ public class CamelCaseTest {
         IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> CamelCase.convertCamelCase(input));
         assertEquals( "Input cannot start with numbers",illegalArgumentException.getMessage());
     }
+
+    @Test
+    public void convertCamelCaseThrowsIfHaveSpecialCharacters() {
+        String input = "nome#Composto";
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> CamelCase.convertCamelCase(input));
+        assertEquals( "Cannot have special characters",illegalArgumentException.getMessage());
+    }
 }
