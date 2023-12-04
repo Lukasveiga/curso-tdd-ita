@@ -33,4 +33,21 @@ public class CamelCaseTest {
         var output = CamelCase.convertCamelCase(input);
         assertEquals(expectedOutput, output);
     }
+
+    @Test
+    public void convertCamelCaseUpperCaseConcatLowerCaseString() {
+        String input = "numeroCPFContribuinte";
+        var expectedOutput = List.of("numero","CPF", "contribuinte");
+        var output = CamelCase.convertCamelCase(input);
+        System.out.println(output);
+        assertEquals(expectedOutput, output);
+    }
+
+    @Test
+    public void convertCamelCaseWithNumberInTheMiddle() {
+        String input = "recupera10Primeiros";
+        var expectedOutput = List.of("recupera","10", "Primeiros");
+        var output = CamelCase.convertCamelCase(input);
+        assertEquals(expectedOutput, output);
+    }
 }
