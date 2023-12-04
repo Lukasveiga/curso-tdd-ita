@@ -5,6 +5,11 @@ import java.util.List;
 
 public class CamelCase {
     public static List<String> convertCamelCase(String input) {
+
+        if(startWithNumbers(input)) {
+            throw new IllegalArgumentException("Input cannot start with numbers");
+        }
+
         var resultList = new ArrayList<String>();
 
         String[] splitedInput;
@@ -37,5 +42,10 @@ public class CamelCase {
     private static boolean hasNumbers(String word) {
         var regex = ".*[0-9].*";
         return word.matches(regex);
+    }
+
+    private static boolean startWithNumbers(String word) {
+        var regex = "[0-9]";
+        return word.substring(0,1).matches(regex);
     }
 }
