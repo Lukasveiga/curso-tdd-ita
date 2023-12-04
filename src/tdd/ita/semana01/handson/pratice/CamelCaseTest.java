@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CamelCaseTest {
 
@@ -48,5 +49,12 @@ public class CamelCaseTest {
         var expectedOutput = List.of("recupera","10", "primeiros");
         var output = CamelCase.convertCamelCase(input);
         assertEquals(expectedOutput, output);
+    }
+
+    @Test
+    public void convertCamelCaseThrowsIfStartWithNumbers() {
+        String input = "10Primeiros";
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () -> CamelCase.convertCamelCase(input));
+        assertEquals( "Input cannot start with numbers",illegalArgumentException.getMessage());
     }
 }
