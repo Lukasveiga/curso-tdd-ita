@@ -6,13 +6,21 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TranslatorTest {
 
     @Test
-    public void translatorWithoutWords() {
+    public void translatorWithoutTranslation() {
         MyTranslator translator = new MyTranslator();
         assertTrue(translator.isEmpty());
     }
 
     @Test
-    public void translatorWithOneWord() {
+    public void translatorWithOneTranslation() {
+        MyTranslator translator = new MyTranslator();
+        translator.addWordTranslate("bom", "good");
+        assertFalse(translator.isEmpty());
+        assertEquals("good", translator.translate("bom"));
+    }
+
+    @Test
+    public void translatorWithTwoTranslations() {
         MyTranslator translator = new MyTranslator();
         translator.addWordTranslate("bom", "good");
         assertFalse(translator.isEmpty());
