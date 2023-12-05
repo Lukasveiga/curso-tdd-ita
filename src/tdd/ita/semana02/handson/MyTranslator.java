@@ -12,6 +12,11 @@ public class MyTranslator {
     }
 
     public void addWordTranslate(String word, String translate) {
+        if(wordsTranslate.containsKey(word)) {
+            wordsTranslate.merge(word, ", " + translate, String::concat);
+            return;
+        }
+
         wordsTranslate.put(word, translate);
     }
 
