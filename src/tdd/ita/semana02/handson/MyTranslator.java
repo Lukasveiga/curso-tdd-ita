@@ -29,8 +29,18 @@ public class MyTranslator {
         StringBuilder phraseTransleted = new StringBuilder();
         var words = phrase.split(" ");
 
-        Arrays.stream(words).forEach(word -> phraseTransleted.append(translate(word)).append(" "));
+        for (String word : words) {
+            phraseTransleted.append(getFirstTranslate(word)).append(" ");
+        }
 
         return  phraseTransleted.toString().trim();
+    }
+
+    private String getFirstTranslate(String word) {
+        var translation = translate(word);
+        if(translation.contains(",")) {
+            translation = translation.substring(0, translation.indexOf(","));
+        }
+        return translation;
     }
 }
