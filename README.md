@@ -52,7 +52,7 @@ Relembrando:
 Nesse momento é realizada toda refatoração necessária para se alcançar um código de qualidade e tendo os testes como segurança de que o comportamento esperado permaneça a cada alteração.
 </p>
 
-[Hands on!]()
+[Hands on!](https://github.com/Lukasveiga/curso-tdd-ita/tree/main/src/tdd/ita/semana02/handson)
 
 
 
