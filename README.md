@@ -54,7 +54,14 @@ Nesse momento é realizada toda refatoração necessária para se alcançar um c
 
 [Hands on!](https://github.com/Lukasveiga/curso-tdd-ita/tree/main/src/tdd/ita/semana02/handson)
 
+*Além do código!*
 
+Além dos benefícios relacionados ao desenvolvimento do código, o TDD também traz vantagens intrinsecamente relacionadas ao desenvolvimento ágil, sendo elas:
+
+1. Feedbacks rápidos;
+2. Aprendizado contínuo;
+3. Foco em soluções simples e funcionais;
+4. Soluções evolutivas e adaptativas;
 
 
 

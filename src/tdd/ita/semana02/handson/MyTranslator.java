@@ -1,6 +1,5 @@
 package tdd.ita.semana02.handson;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
