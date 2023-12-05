@@ -23,7 +23,9 @@ public class TranslatorTest {
     public void translatorWithTwoTranslations() {
         MyTranslator translator = new MyTranslator();
         translator.addWordTranslate("bom", "good");
+        translator.addWordTranslate("mau", "bad");
         assertFalse(translator.isEmpty());
         assertEquals("good", translator.translate("bom"));
+        assertEquals("bad", translator.translate("mau"));
     }
 }
