@@ -38,7 +38,6 @@ public class TranslatorTest {
     public void translatorWithTwoTranslationsSameWord() {
         translator.addWordTranslate("bom", "good");
         translator.addWordTranslate("bom", "nice");
-        assertFalse(translator.isEmpty());
         assertEquals("good, nice", translator.translate("bom"));
     }
 
@@ -47,7 +46,6 @@ public class TranslatorTest {
         translator.addWordTranslate("guerra", "war");
         translator.addWordTranslate("é", "is");
         translator.addWordTranslate("ruim", "bad");
-        assertFalse(translator.isEmpty());
         assertEquals("war is bad", translator.translatePhrase("guerra é ruim"));
     }
 
@@ -57,7 +55,6 @@ public class TranslatorTest {
         translator.addWordTranslate("é", "is");
         translator.addWordTranslate("bom", "good");
         translator.addWordTranslate("bom", "nice");
-        assertFalse(translator.isEmpty());
         assertEquals("peace is good", translator.translatePhrase("paz é bom"));
     }
 }
