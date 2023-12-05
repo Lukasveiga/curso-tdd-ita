@@ -1,19 +1,25 @@
 package tdd.ita.semana02.handson;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TranslatorTest {
 
+    private MyTranslator translator;
+
+    @BeforeEach
+    public void createMyTranslatorInstance() {
+        translator = new MyTranslator();
+    }
+
     @Test
     public void translatorWithoutTranslation() {
-        MyTranslator translator = new MyTranslator();
         assertTrue(translator.isEmpty());
     }
 
     @Test
     public void translatorWithOneTranslation() {
-        MyTranslator translator = new MyTranslator();
         translator.addWordTranslate("bom", "good");
         assertFalse(translator.isEmpty());
         assertEquals("good", translator.translate("bom"));
@@ -21,7 +27,6 @@ public class TranslatorTest {
 
     @Test
     public void translatorWithTwoTranslations() {
-        MyTranslator translator = new MyTranslator();
         translator.addWordTranslate("bom", "good");
         translator.addWordTranslate("mau", "bad");
         assertFalse(translator.isEmpty());
