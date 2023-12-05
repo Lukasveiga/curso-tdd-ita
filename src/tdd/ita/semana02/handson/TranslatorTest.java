@@ -46,7 +46,7 @@ public class TranslatorTest {
     public void translatorPhrase() {
         translator.addWordTranslate("guerra", "war");
         translator.addWordTranslate("é", "is");
-        translator.addWordTranslate("ruim", "ruim");
+        translator.addWordTranslate("ruim", "bad");
         assertFalse(translator.isEmpty());
         assertEquals("war is bad", translator.translatePhrase("guerra é ruim"));
     }

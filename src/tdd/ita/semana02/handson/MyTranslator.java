@@ -1,5 +1,6 @@
 package tdd.ita.semana02.handson;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +26,11 @@ public class MyTranslator {
     }
 
     public String translatePhrase(String phrase) {
-        return  null;
+        StringBuilder phraseTransleted = new StringBuilder();
+        var words = phrase.split(" ");
+
+        Arrays.stream(words).forEach(word -> phraseTransleted.append(translate(word)).append(" "));
+
+        return  phraseTransleted.toString().trim();
     }
 }
