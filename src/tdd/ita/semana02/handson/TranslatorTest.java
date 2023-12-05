@@ -41,4 +41,13 @@ public class TranslatorTest {
         assertFalse(translator.isEmpty());
         assertEquals("good, nice", translator.translate("bom"));
     }
+
+    @Test
+    public void translatorPhrase() {
+        translator.addWordTranslate("guerra", "war");
+        translator.addWordTranslate("é", "is");
+        translator.addWordTranslate("ruim", "ruim");
+        assertFalse(translator.isEmpty());
+        assertEquals("war is bad", translator.translatePhrase("guerra é ruim"));
+    }
 }

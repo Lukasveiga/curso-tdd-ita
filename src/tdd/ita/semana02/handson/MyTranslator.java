@@ -23,4 +23,8 @@ public class MyTranslator {
     public String translate(String word) {
         return wordsTranslate.get(word);
     }
+
+    public String translatePhrase(String phrase) {
+        return  null;
+    }
 }
