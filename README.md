@@ -1,6 +1,6 @@
 # TDD – Desenvolvimento de Software Guiado por Testes - ITA
 
-* Repositório referente ao conteúdo de estudos do curso TDD – Desenvolvimento de Software Guiado por Testes
+Repositório referente ao conteúdo de estudos do curso TDD – Desenvolvimento de Software Guiado por Testes
 oferecido pelo Instituto Tecnológico de Aeronáutica (ITA)
 
 ### Semana 1
@@ -63,7 +63,40 @@ Além dos benefícios relacionados ao desenvolvimento do código, o TDD também 
 3. Foco em soluções simples e funcionais;
 4. Soluções evolutivas e adaptativas;
 
+<p><i>Are you smelling this <b>bad smell</b>?</i></p>
 
+<div align="center">
+<img src="https://st.depositphotos.com/1695366/1395/v/950/depositphotos_13951293-stock-illustration-cartoon-bad-smell.jpg" alt="" width="200">
+</div>
+
+<p align="justify">
+<i>Bad smell</i> ou na tradução mau cheiro, são coisas que suspeitamos não estar muito bem no código. Ou que vai causar algum tipo de preocupação no futuro, caso não sejam corrigidos.
+<br><br>
+E o que seriam esse maus cheiros, por exemplo?
+<ul>
+    <li>Nomes inadequados</li>
+    <li>Código duplicado</li>
+    <li>Métodos grandes - Muitas responsabilidades</li>
+    <li>Classes grandes (God Classes)</li>
+    <li>Comandos If e Switch (Obs: Em excesso)</li>
+    <li>Inveja de Característica</li>
+    <li>Intimidade Imprópria</li>
+    <li>Comentários</li>
+</ul>
+</p>
+
+Ok, encontrei a fonte do *bad smell*. Mas, e agora?
+
+<p align="justify">
+Vamos refatorar! (Com a segurança, garantida pelos testes, de que não iremos alterar o comportamento do código)
+</p>
+
+1. Precisamos listar a fonte do 'mau cheiro';
+2. Escolher a técnica de refatoração;
+3. Aplicar a técnica de refatoração escolhida;
+4. Testar o código refatorado;
+
+Realizar os seguintes passo até que o 'mau cheiro' seja eliminado do código.
 
 
 
