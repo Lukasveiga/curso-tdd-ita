@@ -98,6 +98,25 @@ Vamos refatorar! (Com a segurança, garantida pelos testes, de que não iremos a
 
 Realizar os seguintes passo até que o 'mau cheiro' seja eliminado do código.
 
+### Semana 3
+
+<p align="justify">
+Bom, num ciclo TDD não podemos ir direto colocar as mãos na massa. É necessário levantar as responsabilidades do sistema e também os casos de teste.
+<br><br>
+Relembrando que no levantamento dos requisitos devemos evitar a abordagem BDUF (Big Design Up-front) e sim utilizar da abordagem EDUF (Enough Desing Up-front), de forma que tenhamos uma boa base para as construções dos casos de teste sem que seja necessário idealizar todos os pontos e detalhes do projeto, contribuindo assim para o desenvolvimento ágil.
+<br><br>
+<ul align="justify">
+    <li><i><b>Big design up front</b> é uma abordagem de desenvolvimento de software na qual o design do programa deve ser concluído e aperfeiçoado antes que a implementação desse programa seja iniciada.</i></li>
+<li><i><b>Enough design up front</b> é uma abordagem que diz que a quantidade certa de design é suficiente para criar bases sólidas para um produto de software e sua entrega</i></li>
+</ul>
+</p>
+
+
+
+
+
+
+
 
 
 
