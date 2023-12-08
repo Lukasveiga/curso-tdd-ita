@@ -5,10 +5,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.OngoingStubbing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ShoppingCartTest {
@@ -40,6 +40,14 @@ public class ShoppingCartTest {
 
         cart.addItem(new Product("t-shirt", 50));
         verify(cartObservable, times(1)).addedProduct("t-shirt", 50);
+    }
 
+    @Test
+    public void continueEvenObservableThrows() {
+        doThrow(IllegalArgumentException.class).when(cartObservable).addedProduct("shoes", 100);
+        cart.addItem(new Product("shoes", 100));
+
+        cart.addItem(new Product("t-shirt", 50));
+        verify(cartObservable, times(1)).addedProduct("t-shirt", 50);
     }
 }

@@ -14,8 +14,11 @@ public class ShoppingCart {
     }
 
     public void addItem(Product product) {
-        itens.add(product);
-        cartObservable.addedProduct(product.name(), product.value());
+        try{
+            itens.add(product);
+            cartObservable.addedProduct(product.name(), product.value());
+        } catch (IllegalArgumentException ignored) {
+        }
     }
 
     public int total() {
