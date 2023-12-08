@@ -17,7 +17,7 @@ public class ShoppingCartTest {
     private ShoppingCart cart;
 
     @Mock
-    private CartObservableImp cartObservable;
+    private CartObservable cartObservable;
 
     @Test
     public void totalCart() {
