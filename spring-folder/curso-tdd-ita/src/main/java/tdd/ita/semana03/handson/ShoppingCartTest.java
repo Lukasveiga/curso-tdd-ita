@@ -28,10 +28,18 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void observeAddCart() {
-        var productName = "shoes";
-        var productValue = 100;
-        cart.addItem(new Product(productName, productValue));
-        verify(cartObservable, times(1)).addedProduct(productName, productValue);
+    public void observeAddOneProductToCart() {
+        cart.addItem(new Product("shoes", 100));
+        verify(cartObservable, times(1)).addedProduct("shoes", 100);
+    }
+
+    @Test
+    public void observeAddTwoProductsToCart() {
+        cart.addItem(new Product("shoes", 100));
+        verify(cartObservable, times(1)).addedProduct("shoes", 100);
+
+        cart.addItem(new Product("t-shirt", 50));
+        verify(cartObservable, times(1)).addedProduct("t-shirt", 50);
+
     }
 }
