@@ -5,10 +5,17 @@ import java.util.List;
 
 public class ShoppingCart {
 
+    private final CartObservable cartObservable;
+
     private final List<Product> itens = new ArrayList<>();
+
+    public ShoppingCart(CartObservable cartObservable) {
+        this.cartObservable = cartObservable;
+    }
 
     public void addItem(Product product) {
         itens.add(product);
+        cartObservable.addedProduct(product.name(), product.value());
     }
 
     public int total() {
