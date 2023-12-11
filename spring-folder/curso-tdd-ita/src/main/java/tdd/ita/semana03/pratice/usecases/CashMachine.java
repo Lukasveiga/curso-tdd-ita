@@ -1,4 +1,8 @@
-package tdd.ita.semana03.pratice;
+package tdd.ita.semana03.pratice.usecases;
+
+import tdd.ita.semana03.pratice.ports.RemoteService;
+import tdd.ita.semana03.pratice.exceptions.CheckingAccountNotFoundException;
+import tdd.ita.semana03.pratice.exceptions.UnauthenticatedUserException;
 
 public class CashMachine {
 

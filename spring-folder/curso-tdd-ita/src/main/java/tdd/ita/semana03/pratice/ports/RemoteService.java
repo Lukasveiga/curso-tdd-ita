@@ -1,4 +1,6 @@
-package tdd.ita.semana03.pratice;
+package tdd.ita.semana03.pratice.ports;
+
+import tdd.ita.semana03.pratice.entity.CheckingAccount;
 
 import java.util.Optional;
 

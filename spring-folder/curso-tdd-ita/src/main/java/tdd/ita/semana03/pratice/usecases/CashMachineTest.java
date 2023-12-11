@@ -1,10 +1,14 @@
-package tdd.ita.semana03.pratice;
+package tdd.ita.semana03.pratice.usecases;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import tdd.ita.semana03.pratice.ports.RemoteService;
+import tdd.ita.semana03.pratice.entity.CheckingAccount;
+import tdd.ita.semana03.pratice.exceptions.CheckingAccountNotFoundException;
+import tdd.ita.semana03.pratice.exceptions.UnauthenticatedUserException;
 
 import java.util.Optional;
 
