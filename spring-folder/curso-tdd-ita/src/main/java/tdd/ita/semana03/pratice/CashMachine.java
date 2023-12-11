@@ -1,10 +1,16 @@
 package tdd.ita.semana03.pratice;
 
+import org.springframework.stereotype.Repository;
+
 public class CashMachine {
 
-    public CashMachine() {}
+    private final UserRepository userRepository;
 
-    public String log(CheckingAccount account) {
-        return "";
+    public CashMachine(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public String log(int accountId, String password) {
+        return "Authenticated User";
     }
 }
