@@ -1,17 +1,15 @@
 package tdd.ita.semana03.pratice;
 
-import org.springframework.stereotype.Repository;
-
 public class CashMachine {
 
-    private final UserRepository userRepository;
+    private final RemoteService remoteService;
 
-    public CashMachine(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public CashMachine(RemoteService remoteService) {
+        this.remoteService = remoteService;
     }
 
     public String log(int accountId, String password) {
-        var checkingAccount = userRepository.findAccountById(accountId)
+        var checkingAccount = remoteService.recoveryAccountInfo(accountId)
                 .orElseThrow(() -> new CheckingAccountNotFoundException("Checking Account with id: " + accountId + " was not found."));
 
         return "Authenticated User";

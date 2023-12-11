@@ -20,13 +20,13 @@ public class CashMachineTest {
     private CashMachine cashMachine;
 
     @Mock
-    private UserRepository userRepository;
+    private RemoteService remoteService;
 
     @Test
     public void log_ShouldReturnAutenticatedMessage_WhenValidValuesAreProvided() {
         var account = new CheckingAccount(1,"12345", 0);
 
-        when(userRepository.findAccountById(anyInt()))
+        when(remoteService.recoveryAccountInfo(anyInt()))
                 .thenReturn(Optional.of(account));
 
         var message = cashMachine.log(account.accountId(), account.password());
@@ -37,7 +37,7 @@ public class CashMachineTest {
     public void log_ShouldThrow_WhenCheckingAccountWasNotFound() {
         var account = new CheckingAccount(1,"12345", 0);
 
-        when(userRepository.findAccountById(anyInt()))
+        when(remoteService.recoveryAccountInfo(anyInt()))
                 .thenReturn(Optional.empty());
 
         assertThrows(CheckingAccountNotFoundException.class,
