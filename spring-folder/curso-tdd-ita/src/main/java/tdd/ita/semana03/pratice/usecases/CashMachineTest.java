@@ -28,7 +28,7 @@ public class CashMachineTest {
 
     @Test
     public void log_ShouldReturnAutenticatedMessage_WhenValidValuesAreProvided() {
-        var account = new CheckingAccount(1,"12345", 0);
+        var account = new CheckingAccount(1,"12345");
 
         when(remoteService.recoveryAccountInfo(anyInt()))
                 .thenReturn(Optional.of(account));
@@ -39,7 +39,7 @@ public class CashMachineTest {
 
     @Test
     public void log_ShouldThrow_WhenCheckingAccountWasNotFound() {
-        var account = new CheckingAccount(1,"12345", 0);
+        var account = new CheckingAccount(1,"12345");
 
         when(remoteService.recoveryAccountInfo(anyInt()))
                 .thenReturn(Optional.empty());
@@ -50,7 +50,7 @@ public class CashMachineTest {
 
     @Test
     public void log_ShouldThrow_WhenInvalidPasswordIsProvided() {
-        var account = new CheckingAccount(1,"12345", 0);
+        var account = new CheckingAccount(1,"12345");
 
         when(remoteService.recoveryAccountInfo(anyInt()))
                 .thenReturn(Optional.of(account));
@@ -61,7 +61,7 @@ public class CashMachineTest {
 
     @Test
     public void balance_ShouldReturnBalanceMessage() {
-        var account = new CheckingAccount(1,"12345", 0);
+        var account = new CheckingAccount(1,"12345");
 
         when(remoteService.recoveryAccountInfo(anyInt()))
                 .thenReturn(Optional.of(account));
@@ -73,16 +73,16 @@ public class CashMachineTest {
 
     @Test
     public void deposit_ShouldReturnDepositMessage_WhenDepositMadeSuccessfully() {
-        var account = new CheckingAccount(1,"12345", 0);
+        var account = new CheckingAccount(1,"12345");
 
         when(remoteService.recoveryAccountInfo(anyInt()))
                 .thenReturn(Optional.of(account));
 
         cashMachine.log(account.getAccountId(), account.getPassword());
-        var depositMessage = cashMachine.deposit(500.0);
+        var depositMessage = cashMachine.deposit(500);
         var balanceMessage = cashMachine.balance();
 
         assertEquals(depositMessage, "Deposit received successfully");
-        assertEquals(balanceMessage, String.format("The balance is $%.2f", 500.0));
+        assertEquals(balanceMessage, String.format("The balance is $%.2f", account.getBalance()));
     }
 }

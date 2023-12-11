@@ -33,11 +33,8 @@ public class CashMachine {
     }
 
     public String deposit(double depositValue) {
-        var updatedCheckingAccount = new CheckingAccount(authenticatedUser.getAccountId(),
-                authenticatedUser.getPassword(),
-                authenticatedUser.getBalance() + depositValue);
-
-
-        return "";
+        authenticatedUser.updateBalance(authenticatedUser.getBalance() + depositValue);
+        remoteService.persistAccountChange(authenticatedUser);
+        return "Deposit received successfully";
     }
 }

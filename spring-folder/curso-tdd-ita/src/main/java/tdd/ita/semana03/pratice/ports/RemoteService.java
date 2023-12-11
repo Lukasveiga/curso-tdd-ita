@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface RemoteService {
     Optional<CheckingAccount> recoveryAccountInfo(int accountId);
+
+    void persistAccountChange(CheckingAccount updatedCheckingAccount);
 }

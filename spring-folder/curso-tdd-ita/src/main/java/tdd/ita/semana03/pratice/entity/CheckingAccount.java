@@ -1,15 +1,17 @@
 package tdd.ita.semana03.pratice.entity;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class CheckingAccount {
 
     int accountId;
     String password;
-    double balance;
+    AtomicInteger balance;
 
-    public CheckingAccount(int accountId, String password, double balance) {
+    public CheckingAccount(int accountId, String password) {
         this.accountId = accountId;
         this.password = password;
-        this.balance = balance;
+        balance = new AtomicInteger(0);
     }
 
     public int getAccountId() {
@@ -21,10 +23,11 @@ public class CheckingAccount {
     }
 
     public double getBalance() {
-        return balance;
+        return (double) balance.get() / 100;
     }
 
     public void updateBalance(double newBalance) {
-        this.balance = newBalance;
+        var convertedBalance = (int) newBalance * 100;
+        this.balance.set(convertedBalance);
     }
 }
