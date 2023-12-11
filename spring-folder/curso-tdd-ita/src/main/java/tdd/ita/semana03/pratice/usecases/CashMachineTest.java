@@ -66,7 +66,8 @@ public class CashMachineTest {
         when(remoteService.recoveryAccountInfo(anyInt()))
                 .thenReturn(Optional.of(account));
 
-        var message = cashMachine.balance(account.accountId());
+        cashMachine.log(account.accountId(), account.password());
+        var message = cashMachine.balance();
         assertEquals(message, String.format("The balance is $%.2f", account.balance()));
     }
 }

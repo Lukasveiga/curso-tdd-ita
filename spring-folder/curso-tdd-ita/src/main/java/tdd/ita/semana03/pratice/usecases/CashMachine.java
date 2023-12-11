@@ -1,10 +1,13 @@
 package tdd.ita.semana03.pratice.usecases;
 
+import tdd.ita.semana03.pratice.entity.CheckingAccount;
 import tdd.ita.semana03.pratice.ports.RemoteService;
 import tdd.ita.semana03.pratice.exceptions.CheckingAccountNotFoundException;
 import tdd.ita.semana03.pratice.exceptions.UnauthenticatedUserException;
 
 public class CashMachine {
+
+    private CheckingAccount autenticatedUser;
 
     private final RemoteService remoteService;
 
@@ -20,10 +23,12 @@ public class CashMachine {
             throw new UnauthenticatedUserException("Unauthenticated User");
         }
 
+        autenticatedUser = checkingAccount;
+
         return "Authenticated User";
     }
 
-    public String balance(int accountId) {
-        return "";
+    public String balance() {
+       return String.format("The balance is $%.2f", autenticatedUser.balance());
     }
 }
