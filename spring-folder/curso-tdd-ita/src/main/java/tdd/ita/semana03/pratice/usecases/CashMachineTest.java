@@ -33,7 +33,7 @@ public class CashMachineTest {
         when(remoteService.recoveryAccountInfo(anyInt()))
                 .thenReturn(Optional.of(account));
 
-        var message = cashMachine.log(account.accountId(), account.password());
+        var message = cashMachine.log(account.getAccountId(), account.getPassword());
         assertEquals(message, "Authenticated User");
     }
 
@@ -45,7 +45,7 @@ public class CashMachineTest {
                 .thenReturn(Optional.empty());
 
         assertThrows(CheckingAccountNotFoundException.class,
-                () -> cashMachine.log(account.accountId(), account.password()));
+                () -> cashMachine.log(account.getAccountId(), account.getPassword()));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class CashMachineTest {
                 .thenReturn(Optional.of(account));
 
         assertThrows(UnauthenticatedUserException.class,
-                () -> cashMachine.log(account.accountId(), "invalid_password"));
+                () -> cashMachine.log(account.getAccountId(), "invalid_password"));
     }
 
     @Test
@@ -66,9 +66,9 @@ public class CashMachineTest {
         when(remoteService.recoveryAccountInfo(anyInt()))
                 .thenReturn(Optional.of(account));
 
-        cashMachine.log(account.accountId(), account.password());
+        cashMachine.log(account.getAccountId(), account.getPassword());
         var message = cashMachine.balance();
-        assertEquals(message, String.format("The balance is $%.2f", account.balance()));
+        assertEquals(message, String.format("The balance is $%.2f", account.getBalance()));
     }
 
     @Test
@@ -78,7 +78,7 @@ public class CashMachineTest {
         when(remoteService.recoveryAccountInfo(anyInt()))
                 .thenReturn(Optional.of(account));
 
-        cashMachine.log(account.accountId(), account.password());
+        cashMachine.log(account.getAccountId(), account.getPassword());
         var depositMessage = cashMachine.deposit(500.0);
         var balanceMessage = cashMachine.balance();
 

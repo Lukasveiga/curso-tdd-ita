@@ -19,7 +19,7 @@ public class CashMachine {
         var checkingAccount = remoteService.recoveryAccountInfo(accountId)
                 .orElseThrow(() -> new CheckingAccountNotFoundException("Checking Account with id: " + accountId + " was not found."));
 
-        if(!checkingAccount.password().equals(password)) {
+        if(!checkingAccount.getPassword().equals(password)) {
             throw new UnauthenticatedUserException("Unauthenticated User");
         }
 
@@ -29,10 +29,15 @@ public class CashMachine {
     }
 
     public String balance() {
-       return String.format("The balance is $%.2f", authenticatedUser.balance());
+       return String.format("The balance is $%.2f", authenticatedUser.getBalance());
     }
 
     public String deposit(double depositValue) {
+        var updatedCheckingAccount = new CheckingAccount(authenticatedUser.getAccountId(),
+                authenticatedUser.getPassword(),
+                authenticatedUser.getBalance() + depositValue);
+
+
         return "";
     }
 }
