@@ -12,6 +12,10 @@ public class CashMachine {
         var checkingAccount = remoteService.recoveryAccountInfo(accountId)
                 .orElseThrow(() -> new CheckingAccountNotFoundException("Checking Account with id: " + accountId + " was not found."));
 
+        if(!checkingAccount.password().equals(password)) {
+            throw new UnauthenticatedUserException("Unauthenticated User");
+        }
+
         return "Authenticated User";
     }
 }
