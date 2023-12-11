@@ -7,7 +7,7 @@ import tdd.ita.semana03.pratice.exceptions.UnauthenticatedUserException;
 
 public class CashMachine {
 
-    private CheckingAccount autenticatedUser;
+    private CheckingAccount authenticatedUser;
 
     private final RemoteService remoteService;
 
@@ -23,12 +23,16 @@ public class CashMachine {
             throw new UnauthenticatedUserException("Unauthenticated User");
         }
 
-        autenticatedUser = checkingAccount;
+        authenticatedUser = checkingAccount;
 
         return "Authenticated User";
     }
 
     public String balance() {
-       return String.format("The balance is $%.2f", autenticatedUser.balance());
+       return String.format("The balance is $%.2f", authenticatedUser.balance());
+    }
+
+    public String deposit(double depositValue) {
+        return "";
     }
 }

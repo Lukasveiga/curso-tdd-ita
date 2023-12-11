@@ -70,4 +70,19 @@ public class CashMachineTest {
         var message = cashMachine.balance();
         assertEquals(message, String.format("The balance is $%.2f", account.balance()));
     }
+
+    @Test
+    public void deposit_ShouldReturnDepositMessage_WhenDepositMadeSuccessfully() {
+        var account = new CheckingAccount(1,"12345", 0);
+
+        when(remoteService.recoveryAccountInfo(anyInt()))
+                .thenReturn(Optional.of(account));
+
+        cashMachine.log(account.accountId(), account.password());
+        var depositMessage = cashMachine.deposit(500.0);
+        var balanceMessage = cashMachine.balance();
+
+        assertEquals(depositMessage, "Deposit received successfully");
+        assertEquals(balanceMessage, String.format("The balance is $%.2f", 500.0));
+    }
 }
