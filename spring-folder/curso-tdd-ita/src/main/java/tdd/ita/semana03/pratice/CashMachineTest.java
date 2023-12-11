@@ -43,4 +43,15 @@ public class CashMachineTest {
         assertThrows(CheckingAccountNotFoundException.class,
                 () -> cashMachine.log(account.accountId(), account.password()));
     }
+
+    @Test
+    public void log_ShouldThrow_WhenInvalidPasswordIsProvided() {
+        var account = new CheckingAccount(1,"12345", 0);
+
+        when(remoteService.recoveryAccountInfo(anyInt()))
+                .thenReturn(Optional.of(account));
+
+        assertThrows(UnauthenticatedUserException.class,
+                () -> cashMachine.log(account.accountId(), "invalid_password"));
+    }
 }
