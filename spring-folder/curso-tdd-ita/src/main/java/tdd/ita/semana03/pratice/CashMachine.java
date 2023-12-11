@@ -11,6 +11,9 @@ public class CashMachine {
     }
 
     public String log(int accountId, String password) {
+        var checkingAccount = userRepository.findAccountById(accountId)
+                .orElseThrow(() -> new CheckingAccountNotFoundException("Checking Account with id: " + accountId + " was not found."));
+
         return "Authenticated User";
     }
 }
