@@ -25,6 +25,10 @@ public class CashMachineTest {
     @Test
     public void log_ShouldReturnAutenticatedMessage_WhenValidValuesAreProvided() {
         var account = new CheckingAccount(1,"12345", 0);
+
+        when(userRepository.findAccountById(anyInt()))
+                .thenReturn(Optional.of(account));
+
         var message = cashMachine.log(account.accountId(), account.password());
         assertEquals(message, "Authenticated User");
     }
