@@ -58,4 +58,15 @@ public class CashMachineTest {
         assertThrows(UnauthenticatedUserException.class,
                 () -> cashMachine.log(account.accountId(), "invalid_password"));
     }
+
+    @Test
+    public void balance_ShouldReturnBalanceMessage() {
+        var account = new CheckingAccount(1,"12345", 0);
+
+        when(remoteService.recoveryAccountInfo(anyInt()))
+                .thenReturn(Optional.of(account));
+
+        var message = cashMachine.balance(account.accountId());
+        assertEquals(message, String.format("The balance is $%.2f", account.balance()));
+    }
 }

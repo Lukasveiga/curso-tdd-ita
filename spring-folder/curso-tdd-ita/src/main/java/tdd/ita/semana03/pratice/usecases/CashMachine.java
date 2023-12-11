@@ -22,4 +22,8 @@ public class CashMachine {
 
         return "Authenticated User";
     }
+
+    public String balance(int accountId) {
+        return "";
+    }
 }
