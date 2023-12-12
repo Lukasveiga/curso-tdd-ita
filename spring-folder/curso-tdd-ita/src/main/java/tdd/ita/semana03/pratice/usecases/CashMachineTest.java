@@ -116,4 +116,17 @@ public class CashMachineTest {
 
         assertEquals("Withdraw your money", withdrawMessage);
     }
+
+    @Test
+    public void withdraw_ShouldReturnInsufficientFundsMessage_WhenWCheckingAccountDontHaveEnoughMoney() {
+        var account = new CheckingAccount(1,"12345");
+
+        when(remoteService.recoveryAccountInfo(anyInt()))
+                .thenReturn(Optional.of(account));
+
+        cashMachine.log(account.getAccountId(), account.getPassword());
+        var withdrawMessage = cashMachine.withdraw(500);
+
+        assertEquals("Insufficient Funds", withdrawMessage);
+    }
 }
