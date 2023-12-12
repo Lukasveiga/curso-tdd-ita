@@ -1,6 +1,7 @@
 package tdd.ita.semana03.pratice.usecases;
 
 import tdd.ita.semana03.pratice.entity.CheckingAccount;
+import tdd.ita.semana03.pratice.exceptions.RemoteServiceException;
 import tdd.ita.semana03.pratice.ports.RemoteService;
 import tdd.ita.semana03.pratice.exceptions.CheckingAccountNotFoundException;
 import tdd.ita.semana03.pratice.exceptions.UnauthenticatedUserException;
@@ -29,12 +30,17 @@ public class CashMachine {
     }
 
     public String balance() {
-       return String.format("The balance is $%.2f", authenticatedUser.getBalance());
+        return String.format("The balance is $%.2f", authenticatedUser.getBalance());
     }
 
     public String deposit(double depositValue) {
-        authenticatedUser.updateBalance(authenticatedUser.getBalance() + depositValue);
-        remoteService.persistAccountChange(authenticatedUser);
+        try {
+            authenticatedUser.updateBalance(authenticatedUser.getBalance() + depositValue);
+            remoteService.persistAccountChange(authenticatedUser);
+        } catch (RemoteServiceException e) {
+            throw new RemoteServiceException("Internal Server Error");
+        }
+
         return "Deposit received successfully";
     }
 }

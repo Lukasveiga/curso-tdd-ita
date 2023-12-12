@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import tdd.ita.semana03.pratice.exceptions.RemoteServiceException;
 import tdd.ita.semana03.pratice.ports.RemoteService;
 import tdd.ita.semana03.pratice.entity.CheckingAccount;
 import tdd.ita.semana03.pratice.exceptions.CheckingAccountNotFoundException;
@@ -15,6 +16,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -84,5 +86,20 @@ public class CashMachineTest {
 
         assertEquals(depositMessage, "Deposit received successfully");
         assertEquals(balanceMessage, String.format("The balance is $%.2f", account.getBalance()));
+    }
+
+    @Test
+    public void deposit_ShouldThrow_WhenRemoteServiceThrows() {
+        var account = new CheckingAccount(1,"12345");
+
+        when(remoteService.recoveryAccountInfo(anyInt()))
+                .thenReturn(Optional.of(account));
+
+        cashMachine.log(account.getAccountId(), account.getPassword());
+
+        doThrow(RemoteServiceException.class).when(remoteService).persistAccountChange(account);
+
+        assertThrows(RemoteServiceException.class,
+                () -> cashMachine.deposit(500));
     }
 }
