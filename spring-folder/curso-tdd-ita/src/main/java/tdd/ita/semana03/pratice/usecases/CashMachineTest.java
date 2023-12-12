@@ -129,4 +129,20 @@ public class CashMachineTest {
 
         assertEquals("Insufficient Funds", withdrawMessage);
     }
+
+    @Test
+    public void withdraw_ShouldThrow_WhenRemoteServiceThrows() {
+        var account = new CheckingAccount(1,"12345");
+
+        when(remoteService.recoveryAccountInfo(anyInt()))
+                .thenReturn(Optional.of(account));
+
+        cashMachine.log(account.getAccountId(), account.getPassword());
+        cashMachine.deposit(500);
+
+        doThrow(RemoteServiceException.class).when(remoteService).persistAccountChange(account);
+
+        assertThrows(RemoteServiceException.class,
+                () -> cashMachine.withdraw(500));
+    }
 }

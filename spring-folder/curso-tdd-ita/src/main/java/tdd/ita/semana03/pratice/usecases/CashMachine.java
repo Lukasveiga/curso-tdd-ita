@@ -45,6 +45,19 @@ public class CashMachine {
     }
 
     public String withdraw(int withdrawValue) {
+        var convertWithdrawValue = (double) withdrawValue / 100;
+
+        if(convertWithdrawValue > authenticatedUser.getBalance()) {
+            return "Insufficient Funds";
+        }
+
+        try {
+            authenticatedUser.updateBalance(authenticatedUser.getBalance() - convertWithdrawValue);
+            remoteService.persistAccountChange(authenticatedUser);
+        } catch (RemoteServiceException e) {
+            throw new RemoteServiceException("Internal Server Error");
+        }
+
         return "Withdraw your money";
     }
 }
