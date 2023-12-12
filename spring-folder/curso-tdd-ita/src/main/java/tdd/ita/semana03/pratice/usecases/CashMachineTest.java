@@ -36,7 +36,7 @@ public class CashMachineTest {
                 .thenReturn(Optional.of(account));
 
         var message = cashMachine.log(account.getAccountId(), account.getPassword());
-        assertEquals(message, "Authenticated User");
+        assertEquals("Authenticated User", message);
     }
 
     @Test
@@ -70,7 +70,7 @@ public class CashMachineTest {
 
         cashMachine.log(account.getAccountId(), account.getPassword());
         var message = cashMachine.balance();
-        assertEquals(message, String.format("The balance is $%.2f", account.getBalance()));
+        assertEquals(String.format("The balance is $%.2f", account.getBalance()), message);
     }
 
     @Test
@@ -84,8 +84,8 @@ public class CashMachineTest {
         var depositMessage = cashMachine.deposit(500);
         var balanceMessage = cashMachine.balance();
 
-        assertEquals(depositMessage, "Deposit received successfully");
-        assertEquals(balanceMessage, String.format("The balance is $%.2f", account.getBalance()));
+        assertEquals("Deposit received successfully", depositMessage);
+        assertEquals(String.format("The balance is $%.2f", account.getBalance()), balanceMessage);
     }
 
     @Test
@@ -101,5 +101,20 @@ public class CashMachineTest {
 
         assertThrows(RemoteServiceException.class,
                 () -> cashMachine.deposit(500));
+    }
+
+    @Test
+    public void withdraw_ShouldReturnWithdrawMessage_WhenWithdrawMadeSuccessfully() {
+        var account = new CheckingAccount(1,"12345");
+
+        when(remoteService.recoveryAccountInfo(anyInt()))
+                .thenReturn(Optional.of(account));
+
+        cashMachine.log(account.getAccountId(), account.getPassword());
+        cashMachine.deposit(500);
+        var withdrawMessage = cashMachine.withdraw(500);
+
+        assertEquals("Withdraw your money", withdrawMessage);
+
     }
 }

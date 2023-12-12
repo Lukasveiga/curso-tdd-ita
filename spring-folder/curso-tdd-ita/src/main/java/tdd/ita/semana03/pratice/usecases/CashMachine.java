@@ -43,4 +43,8 @@ public class CashMachine {
 
         return "Deposit received successfully";
     }
+
+    public String withdraw(int withdrawValue) {
+        return "";
+    }
 }
