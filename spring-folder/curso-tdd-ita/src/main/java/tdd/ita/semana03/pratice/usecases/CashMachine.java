@@ -45,6 +45,6 @@ public class CashMachine {
     }
 
     public String withdraw(int withdrawValue) {
-        return "";
+        return "Withdraw your money";
     }
 }

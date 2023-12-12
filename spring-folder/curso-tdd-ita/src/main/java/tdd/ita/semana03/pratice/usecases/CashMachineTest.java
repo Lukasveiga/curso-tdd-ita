@@ -115,6 +115,5 @@ public class CashMachineTest {
         var withdrawMessage = cashMachine.withdraw(500);
 
         assertEquals("Withdraw your money", withdrawMessage);
-
     }
 }
