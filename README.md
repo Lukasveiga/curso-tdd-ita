@@ -111,6 +111,16 @@ Relembrando que no levantamento dos requisitos devemos evitar a abordagem BDUF (
 </ul>
 </p>
 
+<p align="justify">
+Após o levantamento dos requisitos é necessário determinar os casos de teste, tanto os casos positivos quanto os casos negativos.
+<br>
+E iniciar o ciclo do TDD para cada requisito com seus casos de teste como representado no diagrama abaixo:
+</p>
+
+<div align="center">
+<img src="./images/req_casos_test.png" alt="">
+</div>
+
 
 
 
