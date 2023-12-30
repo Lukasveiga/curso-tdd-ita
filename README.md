@@ -5,7 +5,7 @@ oferecido pelo Instituto Tecnológico de Aeronáutica (ITA)
 
 ### Semana 1
 
-*What if we could test our steps before actually making our decisions?*
+_What if we could test our steps before actually making our decisions?_
 
 <p align="justify">
 Na vida real, infelizmente, não é possível utilizar dessa estratégia para tomar nossas decisões. Porém, quando se trata no desenvolvimento/escrita de códigos é possível aplicar essa estratégia.
@@ -28,7 +28,6 @@ O segundo passo é começar a escrever o corpo do código para que os testes pas
 O terceiro passo é refatorar buscando a melhoria do código e verificando o comportamento dos testes a cada alteração.
 Esse ciclo irá se repetir até que o código alcance o nível de satisfação, apresentando uma boa estrutura e preferencialmente seguindo as boas práticas de um código/arquitetura limpa.
 </p>
-
 
 [Hands on!](https://github.com/Lukasveiga/curso-tdd-ita/tree/main/src/tdd/ita/semana01/handson)
 
@@ -54,7 +53,7 @@ Nesse momento é realizada toda refatoração necessária para se alcançar um c
 
 [Hands on!](https://github.com/Lukasveiga/curso-tdd-ita/tree/main/src/tdd/ita/semana02/handson)
 
-*Além do código!*
+_Além do código!_
 
 Além dos benefícios relacionados ao desenvolvimento do código, o TDD também traz vantagens intrinsecamente relacionadas ao desenvolvimento ágil, sendo elas:
 
@@ -85,7 +84,7 @@ E o que seriam esse maus cheiros, por exemplo?
 </ul>
 </p>
 
-Ok, encontrei a fonte do *bad smell*. Mas, e agora?
+Ok, encontrei a fonte do _bad smell_. Mas, e agora?
 
 <p align="justify">
 Vamos refatorar! (Com a segurança, garantida pelos testes, de que não iremos alterar o comportamento do código)
@@ -121,14 +120,37 @@ E iniciar o ciclo do TDD para cada requisito com seus casos de teste como repres
 <img src="./images/req_casos_test.png" alt="">
 </div>
 
+<br>
+<p align><b><i>Maaaas e se minha classe tiver dependências??</i></b></p>
 
+<div align="center">
+<img src="./images/dependency.png" alt="" width=150>
+</div>
 
-
-
-
-
-
-
-
-
-
+<div align="justify">
+<p>
+Quando realizamos o teste de uma classe em que existe uma dependência de outra classe, sem utilizar nenhum método de isolamento, perdemos a essência do teste unitário e passamos a ter um teste de integração.<br><br>
+Mas o que pode tornar isso um problema?
+<ol>
+  <li>A dependência pode demorar a executar</li>
+  <br>
+  <li>A dependência pode depender da infraestrutura</li>
+  <br>
+  <li>A dependência pode ter um comportamento complexo</li>
+</ol>
+<br>
+Todos esses fatores influenciam na dificuldade de escrever os testes como também no tempo de execução, lembrando que durante o desenvolvimento utilizando TDD os testes são executados inúmeras vezes. 
+<br><br>
+<b><i>Ok. Qual seria a solução então?</i></b>
+<br><br>
+O TDD pode definir não somente a interface interna, mas também a interface das dependências. Porém, essas dependências precisam ser abstrações da implementação real, no mundo Java poderemos utilizar as interfaces para alcançar esse comportamento.<br><br>
+Uma vez definidas as dependências de forma abstrata da classe, podemos utilizar um Mock Object. Esse Mock Object é um objeto simulado que copia o comportamento de um objeto real de forma controlada.
+</p>
+<u>Diretivas de um Mock Object:</u>
+<br><br>
+<ul>
+  <li>Imitar a interface da dependência</li>
+  <li>Simular o comportamento do cenário de test</li>
+  <li>Verificar as chamadas esperadas da classe</li>
+</ul>
+</div>
