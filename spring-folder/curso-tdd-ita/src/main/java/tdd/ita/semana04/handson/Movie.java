@@ -11,9 +11,6 @@ public class Movie {
         this.title = title;
         this.priceCode = priceCode;
     }
-    public int getPriceCode() {
-        return priceCode;
-    }
     public void setPriceCode(int arg) {
         priceCode = arg;
     }
@@ -39,5 +36,13 @@ public class Movie {
                 break;
         }
         return thisAmount;
+    }
+
+    public int getFrequentRenterPoints(int daysRented) {
+        if ((this.priceCode == Movie.NEW_RELEASE)
+                &&
+                daysRented > 1)
+            return 2;
+        return 1;
     }
 }
