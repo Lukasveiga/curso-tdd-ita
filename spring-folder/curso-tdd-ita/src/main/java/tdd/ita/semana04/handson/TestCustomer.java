@@ -7,9 +7,6 @@ import org.junit.jupiter.api.Test;
 public class TestCustomer {
 
     Customer client;
-    Rental rental;
-
-    Movie movie;
 
     @BeforeEach
     protected void setUp() {
