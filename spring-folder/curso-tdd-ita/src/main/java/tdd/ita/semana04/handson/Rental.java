@@ -2,16 +2,16 @@ package tdd.ita.semana04.handson;
 
 public class Rental {
 
-    private final Movie _movie;
-    private final int _daysRented;
+    private final Movie movie;
+    private final int daysRented;
     public Rental(Movie movie, int daysRented) {
-        _movie = movie;
-        _daysRented = daysRented;
+        this.movie = movie;
+        this.daysRented = daysRented;
     }
     public int getDaysRented() {
-        return _daysRented;
+        return daysRented;
     }
     public Movie getMovie() {
-        return _movie;
+        return movie;
     }
 }

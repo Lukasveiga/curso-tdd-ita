@@ -5,23 +5,23 @@ import java.util.Vector;
 
 public class Customer {
 
-    private final String _name;
-    private final Vector _rentals = new Vector();
+    private final String name;
+    private final Vector rentals = new Vector();
     public Customer (String name){
-        _name = name;
+        this.name = name;
     };
     public void addRental(Rental arg) {
-        _rentals.addElement(arg);
+        rentals.addElement(arg);
     }
 
     public String getName () {
-        return _name;
+        return name;
     };
 
     public String statement() {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
-        Enumeration rentals = _rentals.elements();
+        Enumeration rentals = this.rentals.elements();
         StringBuilder result = new StringBuilder("Rental Record for " + getName() + "\n");
         while (rentals.hasMoreElements()) {
             double thisAmount = 0;
@@ -49,12 +49,12 @@ public class Customer {
                     &&
                     each.getDaysRented() > 1) frequentRenterPoints ++;
             //show figures for this rental
-            result.append("\t").append(each.getMovie().getTitle()).append("\t").append(String.valueOf(thisAmount)).append("\n");
+            result.append("\t").append(each.getMovie().getTitle()).append("\t").append(thisAmount).append("\n");
             totalAmount += thisAmount;
         }
         //add footer lines
-        result.append("Amount owed is ").append(String.valueOf(totalAmount)).append("\n");
-        result.append("You earned ").append(String.valueOf(frequentRenterPoints)).append(" frequent renter points");
+        result.append("Amount owed is ").append(totalAmount).append("\n");
+        result.append("You earned ").append(frequentRenterPoints).append(" frequent renter points");
         return result.toString();
     }
 }
