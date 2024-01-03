@@ -90,7 +90,7 @@ public class TestCustomer {
     }
 
     private void rentMovie(String title, int type, int days) {
-        Movie movie = new Movie(title, type);
+        Movie movie = Movie.createMovie(title, type);
         Rental rental = new Rental(movie, days);
         client.addRental(rental);
     }
