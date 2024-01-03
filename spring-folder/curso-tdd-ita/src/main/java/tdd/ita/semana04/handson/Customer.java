@@ -7,11 +7,18 @@ public class Customer {
 
     private final String name;
     private final Vector rentals = new Vector();
+
+    private int frequentRenterPoints = 0;
+
+    private double totalAmount = 0.0;
+
     public Customer (String name){
         this.name = name;
     };
-    public void addRental(Rental arg) {
-        rentals.addElement(arg);
+    public void addRental(Rental rental) {
+        rentals.addElement(rental);
+        frequentRenterPoints += rental.getFrequentRenterPoints();
+        totalAmount += rental.getAmount();
     }
 
     public String getName () {
@@ -19,22 +26,25 @@ public class Customer {
     };
 
     public String statement() {
-        double totalAmount = 0;
-        int frequentRenterPoints = 0;
         Enumeration rentals = this.rentals.elements();
         StringBuilder result = new StringBuilder("Rental Record for " + getName() + "\n");
+
         while (rentals.hasMoreElements()) {
             Rental each = (Rental) rentals.nextElement();
-            double thisAmount = each.getAmount();
-            frequentRenterPoints += each.getFrequentRenterPoints();
-            //show figures for this rental
-            result.append("\t").append(each.getMovie().getTitle()).append("\t").append(thisAmount).append("\n");
-            totalAmount += thisAmount;
+            result.append("\t").append(each.getMovie().getTitle()).append("\t").append(each.getAmount()).append("\n");
         }
-        //add footer lines
-        result.append("Amount owed is ").append(totalAmount).append("\n");
-        result.append("You earned ").append(frequentRenterPoints).append(" frequent renter points");
+
+        result.append("Amount owed is ").append(getTotalAmount()).append("\n");
+        result.append("You earned ").append(getTotalFrequentRenterPoints()).append(" frequent renter points");
         return result.toString();
+    }
+
+    private int getTotalFrequentRenterPoints() {
+        return frequentRenterPoints;
+    }
+
+    private double getTotalAmount() {
+        return totalAmount;
     }
 
 }

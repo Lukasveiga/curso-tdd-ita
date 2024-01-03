@@ -17,7 +17,7 @@ public abstract class Movie {
         if (priceCode == CHILDRENS)
             return new Childrens(title);
 
-        throw new RuntimeException("Não existe esse tipo de filme.");
+        throw new RuntimeException("This type of film does not exist.");
     }
 
     protected Movie(String title) {
