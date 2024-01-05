@@ -13,7 +13,9 @@ public class Armazenamento {
     }
 
     public String armazenar(Usuario usuario, Pontos pontos) {
-        armazenamentoRepositorio.salvarPontosParaUsuario(usuario, pontos);
-        return String.format("O usuário %s recebeu %d pontos", usuario.nome(), pontos.pontuacao());
+        usuario.addPontos(pontos);
+        armazenamentoRepositorio.salvarUsuario(usuario);
+        return String.format("O usuário %s recebeu %d pontos do tipo %s",
+                usuario.getNome(), pontos.getPontos(), pontos.getTipo());
     }
 }

@@ -24,6 +24,7 @@ public class ArmazenamentoTest {
         var pontuacao = new Pontos("estrela",10);
         var resultado = armazenamento.armazenar(usuario, pontuacao);
         Assertions.assertThat(resultado)
-                .isEqualTo(String.format("O usuário %s recebeu %d pontos", usuario.nome(), pontuacao.pontuacao()));
+                .isEqualTo(String.format("O usuário %s recebeu %d pontos do tipo %s",
+                        usuario.getNome(), pontuacao.getPontos(), pontuacao.getTipo()));
     }
 }
