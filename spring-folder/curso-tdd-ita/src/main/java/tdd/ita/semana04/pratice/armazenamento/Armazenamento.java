@@ -4,6 +4,8 @@ import tdd.ita.semana04.pratice.armazenamento.entities.Pontos;
 import tdd.ita.semana04.pratice.armazenamento.entities.Usuario;
 import tdd.ita.semana04.pratice.armazenamento.repository.ArmazenamentoRepositorio;
 
+import java.util.Optional;
+
 public class Armazenamento {
 
     private final ArmazenamentoRepositorio armazenamentoRepositorio;
@@ -20,6 +22,9 @@ public class Armazenamento {
     }
 
     public int recuperarPontosDeUsuario(Usuario usuario, String tipo) {
-        return 1;
+        Optional<Pontos> pontuacao = usuario.getListaDePontos()
+                .stream().filter(p -> p.getTipo().equals(tipo)).findFirst();
+
+        return pontuacao.map(Pontos::getPontos).orElse(0);
     }
 }
