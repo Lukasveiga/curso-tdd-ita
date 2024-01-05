@@ -17,6 +17,10 @@ public class Usuario {
         return nome;
     }
 
+    public List<Pontos> getListaDePontos() {
+        return listaDePontos;
+    }
+
     public void addPontos(Pontos pontos) {
         for (Pontos p : listaDePontos) {
             if(p.getTipo().equals(pontos.getTipo())) {
