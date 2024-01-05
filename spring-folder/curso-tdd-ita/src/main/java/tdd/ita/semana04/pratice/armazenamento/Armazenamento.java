@@ -1,5 +1,9 @@
 package tdd.ita.semana04.pratice.armazenamento;
 
+import tdd.ita.semana04.pratice.armazenamento.entities.Pontos;
+import tdd.ita.semana04.pratice.armazenamento.entities.Usuario;
+import tdd.ita.semana04.pratice.armazenamento.repository.ArmazenamentoRepositorio;
+
 public class Armazenamento {
 
     private final ArmazenamentoRepositorio armazenamentoRepositorio;

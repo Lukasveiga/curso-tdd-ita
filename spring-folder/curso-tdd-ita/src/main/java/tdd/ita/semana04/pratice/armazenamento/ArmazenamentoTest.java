@@ -3,6 +3,9 @@ package tdd.ita.semana04.pratice.armazenamento;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tdd.ita.semana04.pratice.armazenamento.entities.Pontos;
+import tdd.ita.semana04.pratice.armazenamento.entities.Usuario;
+import tdd.ita.semana04.pratice.armazenamento.repository.ArmazenamentoRepositorio;
 
 public class ArmazenamentoTest {
 
