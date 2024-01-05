@@ -18,4 +18,8 @@ public class Armazenamento {
         return String.format("O usuário %s recebeu %d pontos do tipo %s",
                 usuario.getNome(), pontos.getPontos(), pontos.getTipo());
     }
+
+    public int recuperarPontosDeUsuario(Usuario usuario, String tipo) {
+        return 1;
+    }
 }

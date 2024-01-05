@@ -26,4 +26,13 @@ public class ArmazenamentoTest {
                 .isEqualTo(String.format("O usuário %s recebeu %d pontos do tipo %s",
                         usuario.getNome(), pontuacao.getPontos(), pontuacao.getTipo()));
     }
+
+    @Test
+    public void recuperarPontosUsuario() {
+        var usuario = new Usuario("Guerra");
+        var pontuacao = new Pontos("estrela",10);
+        armazenamento.armazenar(usuario, pontuacao);
+        var pontosUsuario = armazenamento.recuperarPontosDeUsuario(usuario, pontuacao.getTipo());
+        Assertions.assertThat(pontosUsuario).isEqualTo(pontuacao.getPontos());
+    }
 }
