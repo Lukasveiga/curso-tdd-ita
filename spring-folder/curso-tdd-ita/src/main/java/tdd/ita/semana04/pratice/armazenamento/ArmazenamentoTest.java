@@ -5,17 +5,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tdd.ita.semana04.pratice.armazenamento.entities.Pontos;
 import tdd.ita.semana04.pratice.armazenamento.entities.Usuario;
-import tdd.ita.semana04.pratice.armazenamento.repository.ArmazenamentoRepositorio;
+import tdd.ita.semana04.pratice.armazenamento.repository.ArmazenamentoRepositorioInMemory;
 
 public class ArmazenamentoTest {
 
     private Armazenamento armazenamento;
 
-    private ArmazenamentoRepositorio usuarioRepositorio;
-
     @BeforeEach
     public void setUp() {
-        armazenamento = new Armazenamento(usuarioRepositorio);
+        ArmazenamentoRepositorioInMemory armazenamentoRepositorioInMemory = new ArmazenamentoRepositorioInMemory();
+        armazenamento = new Armazenamento(armazenamentoRepositorioInMemory);
     }
 
     @Test
