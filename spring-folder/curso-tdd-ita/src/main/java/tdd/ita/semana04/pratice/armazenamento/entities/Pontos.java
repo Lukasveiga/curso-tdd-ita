@@ -4,7 +4,7 @@ public class Pontos {
 
     private final String tipo;
 
-    private int pontos;
+    private final int pontos;
 
 
     public Pontos(String tipo, int pontos) {
@@ -18,9 +18,5 @@ public class Pontos {
 
     public int getPontos() {
         return pontos;
-    }
-
-    public void setPontos(int pontos) {
-        this.pontos += pontos;
     }
 }
