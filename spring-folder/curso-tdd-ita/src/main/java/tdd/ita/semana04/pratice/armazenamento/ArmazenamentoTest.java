@@ -35,4 +35,15 @@ public class ArmazenamentoTest {
         var pontosUsuario = armazenamento.recuperarPontosDeUsuario(usuario, pontuacao.getTipo());
         Assertions.assertThat(pontosUsuario).isEqualTo(pontuacao.getPontos());
     }
+
+    @Test
+    public void recuperarPontosUsuarioValoresDobrados() {
+        var usuario = new Usuario("Guerra");
+        var pontuacao = new Pontos("estrela",10);
+        var pontuacao2 = new Pontos("estrela",10);
+        armazenamento.armazenar(usuario, pontuacao);
+        armazenamento.armazenar(usuario, pontuacao2);
+        var pontosUsuario = armazenamento.recuperarPontosDeUsuario(usuario, pontuacao.getTipo());
+        Assertions.assertThat(pontosUsuario).isEqualTo(pontuacao.getPontos() + pontuacao2.getPontos());
+    }
 }
