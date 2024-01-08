@@ -62,6 +62,14 @@ public class ArmazenamentoTest {
     }
 
     @Test
+    public void naoRecuperarPontosUsuarioELancarExcecao() {
+        var nomeInvalido = "Julia";
+        var pontuacao = new Pontos("estrela",10);
+        Assertions.assertThatThrownBy(() -> armazenamento.recuperarPontosDeUsuario(nomeInvalido, pontuacao.tipo()))
+                .isInstanceOf(UsuarioNaoEncontradoException.class).hasMessage("Usuario " + nomeInvalido + " não encontrado.");
+    }
+
+    @Test
     public void retornarUsuariosComPontuacao() {
 
     }
