@@ -2,6 +2,7 @@ package tdd.ita.semana04.pratice.armazenamento;
 
 import tdd.ita.semana04.pratice.armazenamento.entities.Pontos;
 import tdd.ita.semana04.pratice.armazenamento.entities.Usuario;
+import tdd.ita.semana04.pratice.armazenamento.excecoes.UsuarioNaoEncontradoException;
 import tdd.ita.semana04.pratice.armazenamento.repository.ArmazenamentoRepositorio;
 
 import java.util.Optional;
@@ -14,17 +15,24 @@ public class Armazenamento {
         this.armazenamentoRepositorio = armazenamentoRepositorio;
     }
 
-    public String armazenar(Usuario usuario, Pontos pontos) {
-        usuario.addPontos(pontos);
-        armazenamentoRepositorio.salvarUsuario(usuario);
+    public String armazenar(String nomeUsuario, Pontos pontos) {
+        var usuario = buscarUsuario(nomeUsuario);
+        armazenamentoRepositorio.salvarPontosParaUsuario(usuario, pontos);
         return String.format("O usuário %s recebeu %d pontos do tipo %s",
-                usuario.getNome(), pontos.getPontos(), pontos.getTipo());
+                usuario.getNome(), pontos.pontos(), pontos.tipo());
     }
 
-    public int recuperarPontosDeUsuario(Usuario usuario, String tipo) {
-        Optional<Pontos> pontuacao = usuario.getListaDePontos()
-                .stream().filter(p -> p.getTipo().equals(tipo)).findFirst();
+    public int recuperarPontosDeUsuario(String nomeUsuario, String tipo) {
+        var usuario = buscarUsuario(nomeUsuario);
 
-        return pontuacao.map(Pontos::getPontos).orElse(0);
+        Optional<Pontos> pontuacao = usuario.getListaDePontos()
+                .stream().filter(p -> p.tipo().equals(tipo)).findFirst();
+
+        return pontuacao.map(Pontos::pontos).orElse(0);
+    }
+
+    private Usuario buscarUsuario(String nomeUsuario) {
+        return armazenamentoRepositorio.buscarUsuario(nomeUsuario)
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuario " + nomeUsuario + " não encontrado."));
     }
 }
