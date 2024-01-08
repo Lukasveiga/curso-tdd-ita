@@ -5,6 +5,7 @@ import tdd.ita.semana04.pratice.armazenamento.entities.Usuario;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ArmazenamentoRepositorioInMemory implements ArmazenamentoRepositorio {
 
@@ -22,5 +23,12 @@ public class ArmazenamentoRepositorioInMemory implements ArmazenamentoRepositori
     public Optional<Usuario> buscarUsuario(String nomeUsuario) {
         return this.usuarios.stream()
                 .filter(u -> u.getNome().equalsIgnoreCase(nomeUsuario)).findFirst();
+    }
+
+    @Override
+    public List<Usuario> buscarUsuariosComPontuacao() {
+        return this.usuarios.stream()
+                .filter(u -> !u.getListaDePontos().isEmpty())
+                .collect(Collectors.toList());
     }
 }

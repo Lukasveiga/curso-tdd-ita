@@ -78,8 +78,8 @@ public class ArmazenamentoTest {
         armazenamento.armazenar(usuario2, pontuacao);
         var resultado = armazenamento.recuperarUsuariosComPontuacao();
         Assertions.assertThat(resultado).isNotNull();
-        Assertions.assertThat(resultado).isNotEmpty();
-
-
+        Assertions.assertThat(resultado).hasSize(2);
+        Assertions.assertThat(resultado.get(0).getNome()).isEqualToIgnoringCase(usuario1);
+        Assertions.assertThat(resultado.get(1).getNome()).isEqualToIgnoringCase(usuario2);
     }
 }

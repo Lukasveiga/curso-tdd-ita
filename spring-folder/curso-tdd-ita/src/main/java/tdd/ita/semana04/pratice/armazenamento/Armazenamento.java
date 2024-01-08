@@ -39,6 +39,6 @@ public class Armazenamento {
     }
 
     public List<Usuario> recuperarUsuariosComPontuacao() {
-        return new ArrayList<>();
+        return armazenamentoRepositorio.buscarUsuariosComPontuacao();
     }
 }
