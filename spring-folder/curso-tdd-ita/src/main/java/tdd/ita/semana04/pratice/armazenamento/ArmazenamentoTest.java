@@ -82,4 +82,16 @@ public class ArmazenamentoTest {
         Assertions.assertThat(resultado.get(0).getNome()).isEqualToIgnoringCase(usuario1);
         Assertions.assertThat(resultado.get(1).getNome()).isEqualToIgnoringCase(usuario2);
     }
+
+    @Test
+    public void retornarTiposDePontosRegistrados() {
+        var usuario = "guerra";
+        var pontuacao1 = new Pontos("estrela", 10);
+        var pontuacao2 = new Pontos("moeda", 10);
+        armazenamento.armazenar(usuario, pontuacao1);;
+        armazenamento.armazenar(usuario, pontuacao2);
+        var resultado = armazenamento.recuperarPontosRegistrados();
+        Assertions.assertThat(resultado).isNotNull();
+        Assertions.assertThat(resultado).hasSize(2);
+    }
 }

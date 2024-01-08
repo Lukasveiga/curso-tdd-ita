@@ -5,9 +5,7 @@ import tdd.ita.semana04.pratice.armazenamento.entities.Usuario;
 import tdd.ita.semana04.pratice.armazenamento.excecoes.UsuarioNaoEncontradoException;
 import tdd.ita.semana04.pratice.armazenamento.repository.ArmazenamentoRepositorio;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class Armazenamento {
 
@@ -40,5 +38,9 @@ public class Armazenamento {
 
     public List<Usuario> recuperarUsuariosComPontuacao() {
         return armazenamentoRepositorio.buscarUsuariosComPontuacao();
+    }
+
+    public Set<String> recuperarPontosRegistrados() {
+        return new HashSet<>();
     }
 }
