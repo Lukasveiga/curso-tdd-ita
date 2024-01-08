@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tdd.ita.semana04.pratice.armazenamento.entities.Pontos;
 import tdd.ita.semana04.pratice.armazenamento.entities.Usuario;
+import tdd.ita.semana04.pratice.armazenamento.excecoes.UsuarioNaoEncontradoException;
 import tdd.ita.semana04.pratice.armazenamento.repository.ArmazenamentoRepositorioInMemory;
 
 import java.util.Arrays;
@@ -30,6 +31,14 @@ public class ArmazenamentoTest {
         Assertions.assertThat(resultado)
                 .isEqualTo(String.format("O usuário %s recebeu %d pontos do tipo %s",
                         nomeUsuario, pontuacao.pontos(), pontuacao.tipo()));
+    }
+
+    @Test
+    public void naoArmazenarPontuacaoELancarExcecao() {
+        var nomeInvalido = "Julia";
+        var pontuacao = new Pontos("estrela",10);
+        Assertions.assertThatThrownBy(() -> armazenamento.armazenar(nomeInvalido, pontuacao))
+                .isInstanceOf(UsuarioNaoEncontradoException.class).hasMessage("Usuario " + nomeInvalido + " não encontrado.");
     }
 
     @Test
