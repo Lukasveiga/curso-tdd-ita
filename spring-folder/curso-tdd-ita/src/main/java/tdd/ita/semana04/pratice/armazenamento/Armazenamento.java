@@ -6,6 +6,8 @@ import tdd.ita.semana04.pratice.armazenamento.excecoes.UsuarioNaoEncontradoExcep
 import tdd.ita.semana04.pratice.armazenamento.repository.ArmazenamentoRepositorio;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Armazenamento {
 
@@ -41,6 +43,9 @@ public class Armazenamento {
     }
 
     public Set<String> recuperarPontosRegistrados() {
-        return new HashSet<>();
+        return armazenamentoRepositorio.buscarUsuariosComPontuacao()
+                .stream()
+                .flatMap(u -> u.getListaDePontos().stream().map(Pontos::tipo))
+                .collect(Collectors.toSet());
     }
 }
