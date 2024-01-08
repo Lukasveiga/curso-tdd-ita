@@ -5,6 +5,8 @@ import tdd.ita.semana04.pratice.armazenamento.entities.Usuario;
 import tdd.ita.semana04.pratice.armazenamento.excecoes.UsuarioNaoEncontradoException;
 import tdd.ita.semana04.pratice.armazenamento.repository.ArmazenamentoRepositorio;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class Armazenamento {
@@ -34,5 +36,9 @@ public class Armazenamento {
     private Usuario buscarUsuario(String nomeUsuario) {
         return armazenamentoRepositorio.buscarUsuario(nomeUsuario)
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuario " + nomeUsuario + " não encontrado."));
+    }
+
+    public List<Usuario> recuperarUsuariosComPontuacao() {
+        return new ArrayList<>();
     }
 }

@@ -71,6 +71,15 @@ public class ArmazenamentoTest {
 
     @Test
     public void retornarUsuariosComPontuacao() {
+        var usuario1 = "guerra";
+        var usuario2 = "ana";
+        var pontuacao = new Pontos("estrela",10);
+        armazenamento.armazenar(usuario1, pontuacao);
+        armazenamento.armazenar(usuario2, pontuacao);
+        var resultado = armazenamento.recuperarUsuariosComPontuacao();
+        Assertions.assertThat(resultado).isNotNull();
+        Assertions.assertThat(resultado).isNotEmpty();
+
 
     }
 }
