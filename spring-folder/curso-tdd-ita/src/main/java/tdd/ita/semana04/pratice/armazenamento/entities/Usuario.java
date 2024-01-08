@@ -23,9 +23,9 @@ public class Usuario {
 
     public void addPontos(Pontos pontos) {
         for (Pontos p : listaDePontos) {
-            if(p.getTipo().equals(pontos.getTipo())) {
+            if(p.tipo().equals(pontos.tipo())) {
                 var index = listaDePontos.indexOf(p);
-                listaDePontos.set(index, new Pontos(p.getTipo(), p.getPontos() + pontos.getPontos()));
+                listaDePontos.set(index, new Pontos(p.tipo(), p.pontos() + pontos.pontos()));
                 return;
             }
         }
