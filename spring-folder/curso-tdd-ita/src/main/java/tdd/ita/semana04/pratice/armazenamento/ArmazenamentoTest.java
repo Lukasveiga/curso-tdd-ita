@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class ArmazenamentoTest {
 
-    private Armazenamento armazenamento;
+    private ArmazenamentoImp armazenamento;
 
     @BeforeEach
     public void setUp() {
@@ -20,7 +20,7 @@ public class ArmazenamentoTest {
                 new Usuario("Guerra"), new Usuario("Ana"), new Usuario("Jorge")
         );
         ArmazenamentoRepositorioInMemory armazenamentoRepositorioInMemory = new ArmazenamentoRepositorioInMemory(listaUsuarios);
-        armazenamento = new Armazenamento(armazenamentoRepositorioInMemory);
+        armazenamento = new ArmazenamentoImp(armazenamentoRepositorioInMemory);
     }
 
     @Test
