@@ -33,19 +33,22 @@ public class Armazenamento {
         return pontuacao.map(Pontos::pontos).orElse(0);
     }
 
-    private Usuario buscarUsuario(String nomeUsuario) {
-        return armazenamentoRepositorio.buscarUsuario(nomeUsuario)
-                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuario " + nomeUsuario + " não encontrado."));
-    }
-
     public List<Usuario> recuperarUsuariosComPontuacao() {
-        return armazenamentoRepositorio.buscarUsuariosComPontuacao();
+        var usuarios = armazenamentoRepositorio.buscarUsuarios();
+        return usuarios.stream()
+                .filter(u -> !u.getListaDePontos().isEmpty())
+                .collect(Collectors.toList());
     }
 
     public Set<String> recuperarPontosRegistrados() {
-        return armazenamentoRepositorio.buscarUsuariosComPontuacao()
+        return this.recuperarUsuariosComPontuacao()
                 .stream()
                 .flatMap(u -> u.getListaDePontos().stream().map(Pontos::tipo))
                 .collect(Collectors.toSet());
+    }
+
+    private Usuario buscarUsuario(String nomeUsuario) {
+        return armazenamentoRepositorio.buscarUsuario(nomeUsuario)
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuario " + nomeUsuario + " não encontrado."));
     }
 }

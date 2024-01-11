@@ -12,5 +12,5 @@ public interface ArmazenamentoRepositorio {
 
     Optional<Usuario> buscarUsuario(String nomeUsuario);
 
-    List<Usuario> buscarUsuariosComPontuacao();
+    List<Usuario> buscarUsuarios();
 }

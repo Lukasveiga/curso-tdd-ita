@@ -26,9 +26,7 @@ public class ArmazenamentoRepositorioInMemory implements ArmazenamentoRepositori
     }
 
     @Override
-    public List<Usuario> buscarUsuariosComPontuacao() {
-        return this.usuarios.stream()
-                .filter(u -> !u.getListaDePontos().isEmpty())
-                .collect(Collectors.toList());
+    public List<Usuario> buscarUsuarios() {
+        return this.usuarios;
     }
 }
