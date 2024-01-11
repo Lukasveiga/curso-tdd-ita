@@ -12,6 +12,6 @@ public class Placar {
     }
 
     public String registrarPonto(String nomeUsuario, Pontos pontos) {
-        return "";
+        return this.armazenamento.armazenar(nomeUsuario, pontos);
     }
 }

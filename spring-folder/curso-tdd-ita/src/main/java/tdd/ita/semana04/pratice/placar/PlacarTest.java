@@ -28,6 +28,7 @@ public class PlacarTest {
         var pontos = new Pontos("moeda", 20);
         var resultadoEsperado = String.format("O usuaŕio %s recebeu %d pontos do tipo %s",
                 nomeUsuario, pontos.pontos(), pontos.tipo());
+
         when(armazenamento.armazenar(anyString(), any(Pontos.class)))
                 .thenReturn(resultadoEsperado);
 
