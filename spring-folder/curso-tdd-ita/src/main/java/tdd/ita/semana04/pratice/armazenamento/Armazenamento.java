@@ -40,10 +40,11 @@ public class Armazenamento {
                 .collect(Collectors.toList());
     }
 
-    public Set<String> recuperarPontosRegistrados() {
-        return this.recuperarUsuariosComPontuacao()
+    public Set<String> recuperarPontosRegistradosParaUsuario(String nomeUsuario) {
+        var pontosDoUsuario = buscarUsuario(nomeUsuario).getListaDePontos();
+        return pontosDoUsuario
                 .stream()
-                .flatMap(u -> u.getListaDePontos().stream().map(Pontos::tipo))
+                .map(Pontos::tipo)
                 .collect(Collectors.toSet());
     }
 

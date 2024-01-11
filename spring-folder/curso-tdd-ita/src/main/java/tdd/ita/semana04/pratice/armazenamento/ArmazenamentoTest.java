@@ -90,7 +90,7 @@ public class ArmazenamentoTest {
         var pontuacao2 = new Pontos("moeda", 10);
         armazenamento.armazenar(usuario, pontuacao1);;
         armazenamento.armazenar(usuario, pontuacao2);
-        var resultado = armazenamento.recuperarPontosRegistrados();
+        var resultado = armazenamento.recuperarPontosRegistradosParaUsuario(usuario);
         Assertions.assertThat(resultado).isNotNull();
         Assertions.assertThat(resultado).hasSize(2);
         Assertions.assertThat(resultado.contains(pontuacao1.tipo())).isTrue();
