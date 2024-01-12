@@ -16,6 +16,17 @@ public class Placar {
     }
 
     public String retornarPontosUsuario(String nomeUsuario) {
-        return "";
+        var pontosUsuario = armazenamento
+                .recuperarPontosRegistradosParaUsuario(nomeUsuario);
+
+        var pontuacaoGeral = new StringBuilder("Pontos do usuário " + nomeUsuario + " :");
+        pontosUsuario.forEach(p -> {
+            pontuacaoGeral.append("- ")
+                    .append(p.tipo()).append(": ")
+                    .append(p.pontos()).append(" pontos")
+                    .append("\n");
+        });
+
+        return pontuacaoGeral.toString();
     }
 }
