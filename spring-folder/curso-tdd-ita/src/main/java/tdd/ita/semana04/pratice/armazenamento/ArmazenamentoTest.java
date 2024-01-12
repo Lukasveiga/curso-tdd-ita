@@ -93,7 +93,7 @@ public class ArmazenamentoTest {
         var resultado = armazenamento.recuperarPontosRegistradosParaUsuario(usuario);
         Assertions.assertThat(resultado).isNotNull();
         Assertions.assertThat(resultado).hasSize(2);
-        Assertions.assertThat(resultado.contains(pontuacao1.tipo())).isTrue();
-        Assertions.assertThat(resultado.contains(pontuacao2.tipo())).isTrue();
+        Assertions.assertThat(resultado.contains(pontuacao1)).isTrue();
+        Assertions.assertThat(resultado.contains(pontuacao2)).isTrue();
     }
 }

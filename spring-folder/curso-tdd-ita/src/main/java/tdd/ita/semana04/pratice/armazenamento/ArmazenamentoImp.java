@@ -39,12 +39,8 @@ public class ArmazenamentoImp implements Armazenamento {
                 .collect(Collectors.toList());
     }
 
-    public Set<String> recuperarPontosRegistradosParaUsuario(String nomeUsuario) {
-        var pontosDoUsuario = buscarUsuario(nomeUsuario).getListaDePontos();
-        return pontosDoUsuario
-                .stream()
-                .map(Pontos::tipo)
-                .collect(Collectors.toSet());
+    public List<Pontos> recuperarPontosRegistradosParaUsuario(String nomeUsuario) {
+        return buscarUsuario(nomeUsuario).getListaDePontos();
     }
 
     private Usuario buscarUsuario(String nomeUsuario) {

@@ -14,5 +14,5 @@ public interface Armazenamento {
 
     List<Usuario> recuperarUsuariosComPontuacao();
 
-    Set<String> recuperarPontosRegistradosParaUsuario(String nomeUsuario);
+    List<Pontos> recuperarPontosRegistradosParaUsuario(String nomeUsuario);
 }
