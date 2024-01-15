@@ -39,4 +39,8 @@ public class Placar {
         });
         return pontuacaoGeral;
     }
+
+    public String rankingDePontos(String ponto) {
+        return "";
+    }
 }
