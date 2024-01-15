@@ -36,7 +36,8 @@ public class PlacarTest {
         pontosTeste = Arrays.asList(
                 new Pontos("moeda", 20),
                 new Pontos("estrela", 20),
-                new Pontos("diamante", 20)
+                new Pontos("diamante", 20),
+                new Pontos("ticket", 0)
         );
     }
 
@@ -74,6 +75,7 @@ public class PlacarTest {
         Assertions.assertThat(resultado).contains(String.format("- %s: %d pontos", pontosTeste.get(0).tipo(), pontosTeste.get(0).pontos()));
         Assertions.assertThat(resultado).contains(String.format("- %s: %d pontos", pontosTeste.get(1).tipo(), pontosTeste.get(1).pontos()));
         Assertions.assertThat(resultado).contains(String.format("- %s: %d pontos", pontosTeste.get(2).tipo(), pontosTeste.get(2).pontos()));
+        Assertions.assertThat(resultado).doesNotContain(String.format("- %s: %d pontos", pontosTeste.get(3).tipo(), pontosTeste.get(3).pontos()));
     }
 
 }
