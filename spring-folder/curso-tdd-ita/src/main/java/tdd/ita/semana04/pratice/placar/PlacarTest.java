@@ -13,6 +13,7 @@ import tdd.ita.semana04.pratice.armazenamento.entities.Usuario;
 import tdd.ita.semana04.pratice.armazenamento.excecoes.UsuarioNaoEncontradoException;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -109,20 +110,21 @@ public class PlacarTest {
             return (primeiroPonto != null) ? primeiroPonto.pontos() : 0;
         }));
 
+        Collections.reverse(usuarios);
+
         when(armazenamento.recuperarUsuariosComPontuacao())
                 .thenReturn(usuarios);
 
         var resultado = placar.rankingDePontos("estrela");
-        Assertions.assertThat(resultado).contains(String.format("Ranking de pontos do tipo %s:", tipoDePonto));
-        Assertions.assertThat(resultado).contains(
-                String.format("1. %s com %d pontos",
-                        usuarios.get(0).getNome(), usuarios.get(0).getListaDePontos().get(0).pontos()));
-        Assertions.assertThat(resultado).contains(
-                String.format("2. %s com %d pontos",
-                        usuarios.get(1).getNome(), usuarios.get(1).getListaDePontos().get(1).pontos()));
-        Assertions.assertThat(resultado).contains(
-                String.format("3. %s com %d pontos",
-                        usuarios.get(2).getNome(), usuarios.get(2).getListaDePontos().get(2).pontos()));
+
+        var ranking = new StringBuilder("Ranking de pontos do tipo " + tipoDePonto + ":\n");
+        for (int i = 0; i < usuarios.size(); i++) {
+            var usuario = usuarios.get(i);
+            var pontos = usuario.getListaDePontos().get(0);
+            ranking.append(String.format("%d. %s com %d pontos", i + 1, usuario.getNome(), pontos.pontos())).append("\n");
+        }
+
+        Assertions.assertThat(resultado).isEqualTo(ranking.toString());
     }
 
     private static Usuario criarUsuarioComPontos(String nomeUsuario, String tipoPontos, int pontos) {

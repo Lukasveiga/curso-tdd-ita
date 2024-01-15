@@ -40,7 +40,19 @@ public class Placar {
         return pontuacaoGeral;
     }
 
-    public String rankingDePontos(String ponto) {
-        return "";
+    public String rankingDePontos(String tipoPonto) {
+        var usuariosComPontos = armazenamento.recuperarUsuariosComPontuacao();
+
+        var usuariosComTipoPonto = usuariosComPontos.stream().filter(u -> {
+            return u.getListaDePontos().stream().anyMatch(p -> p.tipo().equalsIgnoreCase(tipoPonto));
+        }).toList();
+
+        var ranking = new StringBuilder("Ranking de pontos do tipo " + tipoPonto + ":\n");
+        for (int i = 0; i < usuariosComPontos.size(); i++) {
+            var usuario = usuariosComTipoPonto.get(i);
+            var pontos = usuario.getListaDePontos().get(0);
+            ranking.append(String.format("%d. %s com %d pontos",i + 1, usuario.getNome(), pontos.pontos())).append("\n");
+        }
+        return ranking.toString();
     }
 }
