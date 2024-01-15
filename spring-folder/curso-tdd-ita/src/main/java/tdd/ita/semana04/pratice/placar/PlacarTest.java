@@ -16,7 +16,7 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class PlacarTest {
@@ -76,6 +76,18 @@ public class PlacarTest {
         Assertions.assertThat(resultado).contains(String.format("- %s: %d pontos", pontosTeste.get(1).tipo(), pontosTeste.get(1).pontos()));
         Assertions.assertThat(resultado).contains(String.format("- %s: %d pontos", pontosTeste.get(2).tipo(), pontosTeste.get(2).pontos()));
         Assertions.assertThat(resultado).doesNotContain(String.format("- %s: %d pontos", pontosTeste.get(3).tipo(), pontosTeste.get(3).pontos()));
+    }
+
+    @Test
+    void naoRetornarTodosOsPontosDeUmUsuarioParaUsuarioInesxisteteELancarExcecao() {
+        when(armazenamento.recuperarPontosRegistradosParaUsuario(anyString()))
+                .thenThrow(new UsuarioNaoEncontradoException(String.format("Usuário %s não encontrado", nomeUsuario)));
+
+        verify(armazenamento, times(0)).recuperarPontosRegistradosParaUsuario(nomeUsuario);
+
+        Assertions.assertThatThrownBy(() -> placar.retornarPontosUsuario(nomeUsuario))
+                .isInstanceOf(UsuarioNaoEncontradoException.class)
+                .hasMessage(String.format("Usuário %s não encontrado", nomeUsuario));
     }
 
 }
