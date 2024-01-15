@@ -60,6 +60,8 @@ public class PlacarTest {
         when(armazenamento.armazenar(anyString(), any(Pontos.class)))
                 .thenThrow(new UsuarioNaoEncontradoException(String.format("Usuário %s não encontrado", nomeUsuario)));
 
+        verify(armazenamento, times(0)).armazenar(anyString(), any(Pontos.class));
+
         Assertions.assertThatThrownBy(() -> placar.registrarPonto(nomeUsuario,pontos))
                 .isInstanceOf(UsuarioNaoEncontradoException.class)
                 .hasMessage(String.format("Usuário %s não encontrado", nomeUsuario));
