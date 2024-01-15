@@ -12,10 +12,7 @@ import tdd.ita.semana04.pratice.armazenamento.entities.Pontos;
 import tdd.ita.semana04.pratice.armazenamento.entities.Usuario;
 import tdd.ita.semana04.pratice.armazenamento.excecoes.UsuarioNaoEncontradoException;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -100,17 +97,12 @@ public class PlacarTest {
         var tipoDePonto = "estrela";
 
         var usuarios = Arrays.asList(
-                criarUsuarioComPontos("Guerra", tipoDePonto, 25),
                 criarUsuarioComPontos("Fernandes", tipoDePonto, 19),
+                criarUsuarioComPontos("Guerra", tipoDePonto, 25),
                 criarUsuarioComPontos("Rodrigo", tipoDePonto, 17)
         );
 
-        usuarios.sort(Comparator.comparingInt(u -> {
-            Pontos primeiroPonto = u.getListaDePontos().get(0);
-            return (primeiroPonto != null) ? primeiroPonto.pontos() : 0;
-        }));
-
-        Collections.reverse(usuarios);
+        var usuariosOrdenados = ordenarListaUsuariosPorPontos(usuarios);
 
         when(armazenamento.recuperarUsuariosComPontuacao())
                 .thenReturn(usuarios);
@@ -118,13 +110,25 @@ public class PlacarTest {
         var resultado = placar.rankingDePontos("estrela");
 
         var ranking = new StringBuilder("Ranking de pontos do tipo " + tipoDePonto + ":\n");
-        for (int i = 0; i < usuarios.size(); i++) {
-            var usuario = usuarios.get(i);
+        for (int i = 0; i < usuariosOrdenados.size(); i++) {
+            var usuario = usuariosOrdenados.get(i);
             var pontos = usuario.getListaDePontos().get(0);
             ranking.append(String.format("%d. %s com %d pontos", i + 1, usuario.getNome(), pontos.pontos())).append("\n");
         }
 
         Assertions.assertThat(resultado).isEqualTo(ranking.toString());
+    }
+
+    private static List<Usuario> ordenarListaUsuariosPorPontos(List<Usuario> usuarios) {
+        var usuariosOrdenados = new ArrayList<>(usuarios);
+        usuariosOrdenados.sort(Comparator.comparingInt(u -> {
+            Pontos primeiroPonto = u.getListaDePontos().get(0);
+            return (primeiroPonto != null) ? primeiroPonto.pontos() : 0;
+        }));
+
+        Collections.reverse(usuariosOrdenados);
+
+        return usuariosOrdenados;
     }
 
     private static Usuario criarUsuarioComPontos(String nomeUsuario, String tipoPontos, int pontos) {
