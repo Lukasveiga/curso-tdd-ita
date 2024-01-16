@@ -99,10 +99,15 @@ public class PlacarTest {
         var usuarios = Arrays.asList(
                 criarUsuarioComPontos("Fernandes", tipoDePonto, 19),
                 criarUsuarioComPontos("Guerra", tipoDePonto, 25),
-                criarUsuarioComPontos("Rodrigo", tipoDePonto, 17)
+                criarUsuarioComPontos("Rodrigo", tipoDePonto, 17),
+                criarUsuarioComPontos("Borges", "moeda", 55)
         );
 
         var usuariosOrdenados = ordenarListaUsuariosPorPontos(usuarios);
+
+        var usuariosOrdenadosFiltrado = usuariosOrdenados.stream().filter(u -> {
+            return u.getListaDePontos().stream().anyMatch(p -> p.tipo().equalsIgnoreCase(tipoDePonto));
+        }).toList();
 
         when(armazenamento.recuperarUsuariosComPontuacao())
                 .thenReturn(usuarios);
@@ -110,8 +115,8 @@ public class PlacarTest {
         var resultado = placar.rankingDePontos("estrela");
 
         var ranking = new StringBuilder("Ranking de pontos do tipo " + tipoDePonto + ":\n");
-        for (int i = 0; i < usuariosOrdenados.size(); i++) {
-            var usuario = usuariosOrdenados.get(i);
+        for (int i = 0; i < usuariosOrdenadosFiltrado.size(); i++) {
+            var usuario = usuariosOrdenadosFiltrado.get(i);
             var pontos = usuario.getListaDePontos().get(0);
             ranking.append(String.format("%d. %s com %d pontos", i + 1, usuario.getNome(), pontos.pontos())).append("\n");
         }

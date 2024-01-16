@@ -2,7 +2,11 @@ package tdd.ita.semana04.pratice.placar;
 
 import tdd.ita.semana04.pratice.armazenamento.Armazenamento;
 import tdd.ita.semana04.pratice.armazenamento.entities.Pontos;
+import tdd.ita.semana04.pratice.armazenamento.entities.Usuario;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Placar {
@@ -47,12 +51,26 @@ public class Placar {
             return u.getListaDePontos().stream().anyMatch(p -> p.tipo().equalsIgnoreCase(tipoPonto));
         }).toList();
 
+        var usuariosComTipoPontoOrdenado = ordenarListaUsuariosPorPontos(usuariosComTipoPonto);
+
         var ranking = new StringBuilder("Ranking de pontos do tipo " + tipoPonto + ":\n");
-        for (int i = 0; i < usuariosComPontos.size(); i++) {
-            var usuario = usuariosComTipoPonto.get(i);
+        for (int i = 0; i < usuariosComTipoPontoOrdenado.size(); i++) {
+            var usuario = usuariosComTipoPontoOrdenado.get(i);
             var pontos = usuario.getListaDePontos().get(0);
             ranking.append(String.format("%d. %s com %d pontos",i + 1, usuario.getNome(), pontos.pontos())).append("\n");
         }
         return ranking.toString();
+    }
+
+    private static List<Usuario> ordenarListaUsuariosPorPontos(List<Usuario> usuarios) {
+        var usuariosOrdenados = new ArrayList<>(usuarios);
+        usuariosOrdenados.sort(Comparator.comparingInt(u -> {
+            Pontos primeiroPonto = u.getListaDePontos().get(0);
+            return (primeiroPonto != null) ? primeiroPonto.pontos() : 0;
+        }));
+
+        Collections.reverse(usuariosOrdenados);
+
+        return usuariosOrdenados;
     }
 }
