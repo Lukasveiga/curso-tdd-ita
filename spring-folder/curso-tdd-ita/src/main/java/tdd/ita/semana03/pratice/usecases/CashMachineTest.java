@@ -5,16 +5,22 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import tdd.ita.semana03.pratice.entity.CreditCard;
+import tdd.ita.semana03.pratice.exceptions.ExpiredCreditCardValidityException;
 import tdd.ita.semana03.pratice.exceptions.RemoteServiceException;
+import tdd.ita.semana03.pratice.ports.Hardware;
 import tdd.ita.semana03.pratice.ports.RemoteService;
 import tdd.ita.semana03.pratice.entity.CheckingAccount;
 import tdd.ita.semana03.pratice.exceptions.CheckingAccountNotFoundException;
 import tdd.ita.semana03.pratice.exceptions.UnauthenticatedUserException;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
@@ -27,6 +33,9 @@ public class CashMachineTest {
 
     @Mock
     private RemoteService remoteService;
+
+    @Mock
+    private Hardware hardware;
 
     @Test
     public void log_ShouldReturnAutenticatedMessage_WhenValidValuesAreProvided() {
@@ -144,5 +153,30 @@ public class CashMachineTest {
 
         assertThrows(RemoteServiceException.class,
                 () -> cashMachine.withdraw(500));
+    }
+
+    @Test
+    void readCreditCard_ShouldReturnAccountId_WhenSuccess() {
+        var creditCart = new CreditCard("12345",
+                LocalDate.now().plusMonths(5));
+
+        when(hardware.catchAccountIdFromCreditCard(any(CreditCard.class)))
+                .thenReturn(creditCart.accountId());
+
+        var result = this.cashMachine.readCreditCard(creditCart);
+
+        assertEquals(result, creditCart.accountId());
+    }
+
+    @Test
+    void readCreditCard_ShouldReturnThrow_WhenCreditCarWithExpiredValidityIsProvided() {
+        var creditCart = new CreditCard("12345",
+                LocalDate.now().minusMonths(1));
+
+        doThrow(ExpiredCreditCardValidityException.class)
+                .when(hardware).catchAccountIdFromCreditCard(creditCart);
+
+        assertThrows(ExpiredCreditCardValidityException.class,
+                () -> hardware.catchAccountIdFromCreditCard(creditCart));
     }
 }
