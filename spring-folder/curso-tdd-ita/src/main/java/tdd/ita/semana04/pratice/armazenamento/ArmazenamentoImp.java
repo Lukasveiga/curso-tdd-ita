@@ -45,6 +45,6 @@ public class ArmazenamentoImp implements Armazenamento {
 
     private Usuario buscarUsuario(String nomeUsuario) {
         return armazenamentoRepositorio.buscarUsuario(nomeUsuario)
-                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuario " + nomeUsuario + " não encontrado."));
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário " + nomeUsuario + " não encontrado."));
     }
 }

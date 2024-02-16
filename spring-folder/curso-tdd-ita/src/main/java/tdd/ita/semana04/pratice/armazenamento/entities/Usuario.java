@@ -5,9 +5,12 @@ import java.util.List;
 
 public class Usuario {
 
-    private final String nome;
+    private String nome;
 
     private final List<Pontos> listaDePontos = new ArrayList<>();
+
+    public Usuario() {
+    }
 
     public Usuario(String nome) {
         this.nome = nome;

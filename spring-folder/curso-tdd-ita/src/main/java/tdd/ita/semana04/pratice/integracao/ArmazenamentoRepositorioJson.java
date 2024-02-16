@@ -1,5 +1,6 @@
 package tdd.ita.semana04.pratice.integracao;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import tdd.ita.semana04.pratice.armazenamento.entities.Pontos;
 import tdd.ita.semana04.pratice.armazenamento.entities.Usuario;
@@ -12,27 +13,20 @@ import java.util.Optional;
 
 public class ArmazenamentoRepositorioJson implements ArmazenamentoRepositorio {
 
-    private final List<Usuario> usuarios;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private final ObjectMapper objectMapper;
+    private static final String PATH = "src/main/java/tdd/ita/semana04/pratice/integracao/armazenamento.json";
 
-    private static final String PATH = "armazenamento.json";
-
-    public ArmazenamentoRepositorioJson(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-        this.objectMapper = new ObjectMapper();
-
-        writeJson(usuarios);
-    }
 
     @Override
     public void salvarPontosParaUsuario(Usuario usuario, Pontos pontos) {
-
         List<Usuario> usuariosFromJson = readJson();
 
-        usuariosFromJson.stream()
-                .filter(u -> u.getNome().equalsIgnoreCase(usuario.getNome()))
-                .peek(u -> u.addPontos(pontos));
+        usuariosFromJson.forEach(u -> {
+            if(u.getNome().equals(usuario.getNome())) {
+                u.addPontos(pontos);
+            }
+        });
 
         writeJson(usuariosFromJson);
     }
@@ -48,7 +42,8 @@ public class ArmazenamentoRepositorioJson implements ArmazenamentoRepositorio {
         return readJson();
     }
 
-    private void writeJson(List<Usuario> usuarios) {
+
+    public void writeJson(List<Usuario> usuarios) {
         try {
             var outputFile = new File(PATH);
 
@@ -56,7 +51,7 @@ public class ArmazenamentoRepositorioJson implements ArmazenamentoRepositorio {
                 outputFile.createNewFile();
             }
 
-            this.objectMapper.writeValue(new File(PATH), usuarios);
+            this.objectMapper.writeValue(outputFile, usuarios);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -64,8 +59,14 @@ public class ArmazenamentoRepositorioJson implements ArmazenamentoRepositorio {
 
     private List<Usuario> readJson() {
         try {
-            return objectMapper.readValue(new File(PATH),
-                    objectMapper.getTypeFactory().constructCollectionType(List.class, Usuario.class));
+            var outputFile = new File(PATH);
+
+            if(!outputFile.exists()) {
+                outputFile.createNewFile();
+            }
+
+            return objectMapper.readValue(outputFile, new TypeReference<List<Usuario>>() {
+            });
 
         } catch (IOException e) {
             throw new RuntimeException(e);
